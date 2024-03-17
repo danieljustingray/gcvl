@@ -2,10 +2,40 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vmbo examens - GVcL</title>
     <link rel="stylesheet" href="../style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <style>
+        .table-container {
+            overflow-x: auto;
+        }
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 17px;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #ccc;
+        }
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -24,84 +54,174 @@
     </nav>
     <section>
         <article>
-            <h3>Examenrooster Tijdvak 1</h3>
-            <table id="examTable">
-                <thead>
-                    <tr>
-                        <th>Datum</th>
-                        <th>Tijdstip</th>
-                        <th>Vak</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>dinsdag 14 mei</td>
-                        <td>09:00 - 11:00</td>
-                        <td>geschiedenis</td>
-                    </tr>
-                    <tr>
-                        <td>dinsdag 14 mei</td>
-                        <td>13:30 - 15:30</td>
-                        <td>Engels</td>
-                    </tr>
-                    <tr>
-                        <td>woensdag 15 mei</td>
-                        <td>09:00 - 11:00</td>
-                        <td>Duits</td>
-                    </tr>
-                    <tr>
-                        <td>woensdag 15 mei</td>
-                        <td>13:30 - 15:30</td>
-                        <td>biologie</td>
-                    </tr>
-                    <tr>
-                        <td>donderdag 16 mei</td>
-                        <td>13:30 - 15:30</td>
-                        <td>Nederlands</td>
-                    </tr>
-                    <tr>
-                        <td>vrijdag 17 mei</td>
-                        <td>13:30 - 15:30</td>
-                        <td>NaSk 1 (natuurkunde)</td>
-                    </tr>
-                    <tr>
-                        <td>dinsdag 21 mei</td>
-                        <td>09:00 - 11:00</td>
-                        <td>beeldende vorming/tekenen</td>
-                    </tr>
-                    <tr>
-                        <td>dinsdag 21 mei</td>
-                        <td>13:30 - 15:30</td>
-                        <td>economie</td>
-                    </tr>
-                <tr>
-                        <td>woensdag 22 mei</td>
-                        <td>09:00 - 11:00</td>
-                        <td>maatschappijkunde</td>
-                    </tr>
-                    <tr>
-                        <td>woensdag 22 mei</td>
-                        <td>13:30 - 15:30</td>
-                        <td>Frans</td>
-                    </tr>
-                    <tr>
-                        <td>donderdag 23 mei</td>
-                        <td>13:30 - 15:30</td>
-                        <td>wiskunde</td>
-                    </tr>
-                    <tr>
-                        <td>vrijdag 24 mei</td>
-                        <td>13:30 - 15:30</td>
-                        <td>aardrijkskunde</td>
-                    </tr>
-                    <tr>
-                        <td>maandag 27 mei</td>
-                        <td>13:30 - 15:30</td>
-                        <td>NaSk 2 (scheikunde)</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button onclick="downloadTable()">Download Table as Image</button>
+            <h3>Examenroosters</h3>
+            <div class="tab">
+                <button class="tablinks" onclick="openTijdvak(event, 'Tijdvak1')">Tijdvak 1</button>
+                <button class="tablinks" onclick="openTijdvak(event, 'Tijdvak2')">Tijdvak 2</button>
+              </div>
+              <div id="Tijdvak1" class="tabcontent">
+                <h3>Tijdvak 1 <span class="close-btn" onclick="closeTab('Tijdvak1')" style="cursor: pointer;"><i>klik op mij om het tabblad te sluiten</i></span></h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Datum</th>
+                                <th>Tijdstip</th>
+                                <th>Vak</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>dinsdag 14 mei</td>
+                                <td>09:00 - 11:00</td>
+                                <td>geschiedenis</td>
+                           </tr>              
+                            <tr>
+                               <td>dinsdag 14 mei</td>
+                               <td>13:30 - 15:30</td>
+                               <td>Engels</td>
+                           </tr>
+                           <tr>
+                               <td>woensdag 15 mei</td>
+                               <td>09:00 - 11:00</td>
+                               <td>Duits</td>
+                           </tr>
+                           <tr>
+                               <td>woensdag 15 mei</td>
+                               <td>13:30 - 15:30</td>
+                               <td>biologie</td>
+                           </tr>
+                           <tr>
+                               <td>donderdag 16 mei</td>
+                               <td>13:30 - 15:30</td>
+                               <td>Nederlands</td>
+                           </tr>
+                           <tr>
+                               <td>vrijdag 17 mei</td>
+                               <td>13:30 - 15:30</td>
+                               <td>NaSk 1 (natuurkunde)</td>
+                           </tr>
+                           <tr>
+                               <td>dinsdag 21 mei</td>
+                               <td>09:00 - 11:00</td>
+                               <td>beeldende vorming/tekenen</td>
+                           </tr>
+                           <tr>
+                               <td>dinsdag 21 mei</td>
+                               <td>13:30 - 15:30</td>
+                               <td>economie</td>
+                           </tr>
+                            <tr>
+                               <td>woensdag 22 mei</td>
+                               <td>09:00 - 11:00</td>
+                               <td>maatschappijkunde</td>
+                           </tr>
+                           <tr>
+                               <td>woensdag 22 mei</td>
+                               <td>13:30 - 15:30</td>
+                               <td>Frans</td>
+                           </tr>
+                           <tr>
+                               <td>donderdag 23 mei</td>
+                               <td>13:30 - 15:30</td>
+                               <td>wiskunde</td>
+                           </tr>
+                           <tr>
+                               <td>vrijdag 24 mei</td>
+                               <td>13:30 - 15:30</td>
+                               <td>aardrijkskunde</td>
+                           </tr>
+                           <tr>
+                               <td>maandag 27 mei</td>
+                               <td>13:30 - 15:30</td>
+                               <td>NaSk 2 (scheikunde)</td>
+                           </tr>
+                        </tbody>
+                    </table>
+                </div>    
+              </div>
+              <div id="Tijdvak2" class="tabcontent">
+                <h3>Tijdvak 2 <span class="close-btn" onclick="closeTab('Tijdvak2')" style="cursor: pointer;"><i>klik op mij om het tabblad te sluiten</i></span></h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Datum</th>
+                                <th>Tijdstip</th>
+                                <th>Vak</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>dinsdag 18 juni</td>
+                                <td>13:30 - 15:30</td>
+                                <td>Duits</td>
+                           </tr>              
+                           <tr>
+                                <td>dinsdag 18 juni</td>
+                                <td>13:30 - 15:30</td>
+                                <td>Frans</td>
+                            </tr>              
+                            <tr>
+                                <td>dinsdag 18 juni</td>
+                                <td>13:30 - 15:30</td>
+                                <td>Nederlands</td>
+                           </tr>
+                           <tr>
+                               <td>woensdag 19 juni</td>
+                               <td>09:00 - 11:00</td>
+                               <td>maatschappijkunde</td>
+                           </tr>
+                           <tr>
+                               <td>woensdag 19 juni</td>
+                               <td>13:30 - 15:30</td>
+                               <td>geschiedenis</td>
+                           </tr>
+                           <tr>
+                               <td>donderdag 20 juni</td>
+                               <td>13:30 - 15:30</td>
+                               <td>aardrijkskunde</td>
+                           </tr>
+                           <tr>
+                               <td>donderdag 20 juni</td>
+                               <td>13:30 - 15:30</td>
+                               <td>biologie</td>
+                           </tr>
+                           <tr>
+                               <td>donderdag 20 juni</td>
+                               <td>13:30 - 15:30</td>
+                               <td>wiskunde</td>
+                           </tr>
+                            <tr>
+                               <td>vrijdag 21 juni</td>
+                               <td>13:30 - 15:30</td>
+                               <td>beeldende vorming/tekenen</td>
+                           </tr>
+                           <tr>
+                               <td>vrijdag 21 juni</td>
+                               <td>13:30 - 15:30</td> 
+                               <td>NaSk 1 (natuurkunde)</td>
+                           </tr>
+                           <tr>
+                               <td>maandag 24 juni</td>
+                               <td>13:30 - 15:30</td>
+                               <td>NaSk 2 (scheikunde)</td>
+                           </tr>
+                           <tr>
+                               <td>dinsdag 25 juni</td>
+                               <td>13:30 - 15:30</td>
+                               <td>economie</td>
+                           </tr>
+                           <tr>
+                               <td>dinsdag 25 juni</td>
+                               <td>13:30 - 15:30</td>
+                               <td>Engels</td>
+                           </tr>
+                        </tbody>
+                    </table>
+                </div>    
+
+              </div>
         </article>
         <aside>
             <p><b>Oefenen!</b></p>
@@ -114,17 +234,27 @@
         <p><i>@ 2024 GCvL</i></p>
         <i>Deze website wordt beheerd door een leerling op het Griftland college</i>
     </footer>
-
     <script>
-        function downloadTable() {
-            var table = document.getElementById('examTable');
-            html2canvas(table).then(function(canvas) {
-                var link = document.createElement('a');
-                link.download = 'examenrooster_tv1.png';
-                link.href = canvas.toDataURL();
-                link.click();
-            });
+        function openTijdvak(evt, tijdvakName) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          document.getElementById(tijdvakName).style.display = "block";
+          evt.currentTarget.className += " active";
         }
-    </script>
+        function closeTab(tabName) {
+            document.getElementById(tabName).style.display = "none";
+            var tabButton = document.querySelector(".tablinks[data-tab='" + tabName + "']");
+            if (tabButton) {
+                tabButton.classList.remove("active");
+            }
+        }
+        </script>
 </body>
 </html>
