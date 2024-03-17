@@ -3,6 +3,7 @@ body {
     color: rgb(0, 56, 131);
     padding: 0px;
     background-color: rgb(231, 237, 241);
+    cursor: default;
 }
 header {
     text-align: center;
