@@ -1,3 +1,28 @@
 body {
     font-family: Arial;
+    color: rgb(0, 56, 131);
+    margin: 0px;
+}
+header {
+    text-align: center;
+    background-color: rgb(231, 237, 241);
+    padding-bottom: 6px;
+    padding-top: 6px;
+    font-size: 35px;
+    font-family: Calibri;
+}
+nav {
+    background-color: rgb(153, 194, 28);
+    text-align: center;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    color: white;
+}
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+nav a:hover {
+    color: rgb(0, 56, 131);
 }
