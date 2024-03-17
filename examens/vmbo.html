@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
     <title>vmbo examens - GVcL</title>
     <link rel="stylesheet" href="../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <header>
@@ -24,78 +25,97 @@
     <section>
         <article>
             <h3>Examenrooster Tijdvak 1</h3>
-            <table>
-                <tr>
-                    <th>Datum</th>
-                    <th>Tijdstip</th>
-                    <th>Vak</th>
-                </tr>
-                <tr>
-                    <td>dinsdag 14 mei</td>
-                    <td>09:00 - 11:00</td>
-                    <td>geschiedenis</td>
-                </tr>
-                <tr>
-                    <td>dinsdag 14 mei</td>
-                    <td>13:30 - 15:30</td>
-                    <td>Engels</td>
-                </tr>
-                <tr>
-                    <td>woensdag 15 mei</td>
-                    <td>09:00 - 11:00</td>
-                    <td>Duits</td>
-                </tr>
-                <tr>
-                    <td>woensdag 15 mei</td>
-                    <td>13:30 - 15:30</td>
-                    <td>biologie</td>
-                </tr>
-                <tr>
-                    <td>donderdag 16 mei</td>
-                    <td>13:30 - 15:30</td>
-                    <td>Nederlands</td>
-                </tr>
-                <tr>
-                    <td>vrijdag 17 mei</td>
-                    <td>13:30 - 15:30</td>
-                    <td>NaSk 1 (natuurkunde)</td>
-                </tr>
-                <tr>
-                    <td>dinsdag 21 mei</td>
-                    <td>09:00 - 11:00</td>
-                    <td>beeldende vorming/tekenen</td>
-                </tr>
-                <tr>
-                    <td>dinsdag 21 mei</td>
-                    <td>13:30 - 15:30</td>
-                    <td>economie</td>
-                </tr>
-                <tr>
-                    <td>woensdag 22 mei</td>
-                    <td>09:00 - 11:00</td>
-                    <td>maatschappijkunde</td>
-                </tr>
-                <tr>
-                    <td>woensdag 22 mei</td>
-                    <td>13:30 - 15:30</td>
-                    <td>Frans</td>
-                </tr>
-                <tr>
-                    <td>donderdag 23 mei</td>
-                    <td>13:30 - 15:30</td>
-                    <td>wiskunde</td>
-                </tr>
-                <tr>
-                    <td>vrijdag 24 mei</td>
-                    <td>13:30 - 15:30</td>
-                    <td>aardrijkskunde</td>
-                </tr>
-                <tr>
-                    <td>maandag 27 mei</td>
-                    <td>13:30 - 15:30</td>
-                    <td>NaSk 2 (scheikunde)</td>
-                </tr>
+            <table id="examTable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Datum</th>
+                        <th>Tijdstip</th>
+                        <th>Vak</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                        <td>dinsdag 14 mei</td>
+                        <td>09:00 - 11:00</td>
+                        <td>geschiedenis</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>dinsdag 14 mei</td>
+                                <td>13:30 - 15:30</td>
+                                <td>Engels</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>woensdag 15 mei</td>
+                                <td>09:00 - 11:00</td>
+                                <td>Duits</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>woensdag 15 mei</td>
+                                <td>13:30 - 15:30</td>
+                                <td>biologie</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>donderdag 16 mei</td>
+                                <td>13:30 - 15:30</td>
+                                <td>Nederlands</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>vrijdag 17 mei</td>
+                                <td>13:30 - 15:30</td>
+                                <td>NaSk 1 (natuurkunde)</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>dinsdag 21 mei</td>
+                                <td>09:00 - 11:00</td>
+                                <td>beeldende vorming/tekenen</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>dinsdag 21 mei</td>
+                                <td>13:30 - 15:30</td>
+                                <td>economie</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>woensdag 22 mei</td>
+                                <td>09:00 - 11:00</td>
+                                <td>maatschappijkunde</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>woensdag 22 mei</td>
+                                <td>13:30 - 15:30</td>
+                                <td>Frans</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>donderdag 23 mei</td>
+                                <td>13:30 - 15:30</td>
+                                <td>wiskunde</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>vrijdag 24 mei</td>
+                                <td>13:30 - 15:30</td>
+                                <td>aardrijkskunde</td>
+                            </tr>
+                            <tr>
+                        <td><input type="checkbox" class="checkbox" value="1"></td>
+                                <td>maandag 27 mei</td>
+                                <td>13:30 - 15:30</td>
+                                <td>NaSk 2 (scheikunde)</td>
+                            </tr>
+                </tbody>
             </table>
+            <button onclick="downloadSelectedRows()">Download Selected Rows as Image</button>
         </article>
         <aside>
             <p><b>Oefenen!</b></p>
@@ -108,5 +128,33 @@
         <p><i>@ 2024 GCvL</i></p>
         <i>Deze website wordt beheerd door een leerling op het Griftland college</i>
     </footer>
+
+    <script>
+        function downloadSelectedRows() {
+            var selectedRows = document.querySelectorAll('#examTable tbody input[type="checkbox"]:checked');
+            if (selectedRows.length === 0) {
+                alert('Select at least one row.');
+                return;
+            }
+            var tableClone = document.getElementById('examTable').cloneNode(true);
+            var tableBody = tableClone.querySelector('tbody');
+            tableClone.removeChild(tableBody);
+            var selectedRowIndexes = Array.from(selectedRows).map(function (checkbox) {
+                return parseInt(checkbox.value, 10);
+            });
+            var rows = Array.from(document.querySelectorAll('#examTable tbody tr'));
+            rows.forEach(function (row, index) {
+                if (selectedRowIndexes.includes(index + 1)) {
+                    tableBody.appendChild(row.cloneNode(true));
+                }
+            });
+            html2canvas(tableClone).then(function (canvas) {
+                var link = document.createElement('a');
+                link.download = 'selected_exam_rows.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
 </body>
 </html>
