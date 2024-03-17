@@ -2,6 +2,7 @@ body {
     font-family: Arial;
     color: rgb(0, 56, 131);
     margin: 0px;
+    background-color: rgb(230, 230, 230);
 }
 header {
     text-align: center;
@@ -26,3 +27,38 @@ nav a {
 nav a:hover {
     color: rgb(0, 56, 131);
 }
+section {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+article {
+    background-color: aliceblue;
+    width: 70%;
+    padding-left: 10px;
+}
+aside {
+    width: 30%;
+    padding-left: 2px;
+    background-color: white;
+    color: black;
+    border-left-width: 1px;
+    border-left-style: solid;
+}
+footer {
+    background-color: beige;
+    text-align: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: #35964B;
+    color: white;
+}
+li {
+    color: #35964B;
+}
+a {
+    color: blue;
+    text-decoration: none;
+}
+a:hover {color: purple;}
