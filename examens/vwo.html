@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vwo examens - GVcL</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="../images/x-icon" href="images/favicon.png">
+    <style>
+        .table-container {
+            overflow-x: auto;
+        }
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 17px;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #ccc;
+        }
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+        input {
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../index.html"><img src="../images/logo.png" width="425px" height="100px"></a>
+    </header>
+    <nav>
+        <a href="../aboutus.html">Over ons</a> |
+        <div class="dropdown">
+            <button class="dropbtn">Examens</button> | 
+            <div class="dropdown-content">
+                <a href="vmbo.html">vmbo-tl/mavo</a>
+                <a href="havo.html">havo</a>
+                <a href="#">vwo(xtra)</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Onderbouw</button>
+            <div class="dropdown-content">
+                <a href="../onderbouw/brugklas.html">Brugklas</a>
+                <a href="../onderbouw/vmbo2-3-4.html">vmbo-tl/mavo 2</a>
+                <a href="../onderbouw/havo2-3.html">havo 2-3</a>
+                <a href="../onderbouw/vwo2-3.html">vwo(xtra) 2-3</a>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <article>
+            <h2>vwo</h2>
+            <h3>Examenroosters</h3>
+            <a href="examenrooster_havo_gc.xlsx" download>
+                <p>Download als Excel (.xlsx) bestand (7 kb)</p>
+              </a>
+            <div class="tab">
+                <button class="tablinks" onclick="openTijdvak(event, 'Tijdvak1')">Tijdvak 1</button>
+                <button class="tablinks" onclick="openTijdvak(event, 'Tijdvak2')">Tijdvak 2</button>
+              </div>
+
+              <div id="Tijdvak1" class="tabcontent">
+                <h3>Tijdvak 1 <span class="close-btn" onclick="closeTab('Tijdvak1')" style="cursor: pointer;"><i>klik op mij om het tabblad te sluiten</i></span></h3>
+                <input type="text" id="myInput1" onkeyup="searchFunction('myInput1', 'myTable1')" placeholder="Zoek vak..." title="Type in a name"><br><br>
+                <div class="table-container">
+                    <table id="myTable1">
+                        <tbody><tr><th>Datum</th><th>Tijdstip</th><th>Vak</th></tr><tr><td>dinsdag 14 mei</td><td>13:30 - 16:30</td><td>biologie</td></tr><tr><td>woensdag 15 mei</td><td>13:30 - 16:30</td><td>Nederlands</td></tr><tr><td>donderdag 16 mei</td><td>13:30 - 16:30</td><td>natuurkunde</td></tr><tr><td>vrijdag 17 mei</td><td>09:00 - 11:30</td><td>Duits</td></tr><tr><td>vrijdag 17 mei</td><td>13:30 - 16:30</td><td>aardrijkskunde</td></tr><tr><td>dinsdag 21 mei</td><td>09:00 - 12:00</td><td>geschiedenis</td></tr><tr><td>dinsdag 21 mei</td><td>13:30 - 16:30</td><td>scheikunde</td></tr><tr><td>woensdag 22 mei</td><td>09:00 - 11:30</td><td>tekenen</td></tr><tr><td>woensdag 22 mei</td><td>13:30 - 16:30</td><td>bedrijfseconomie</td></tr><tr><td>donderdag 23 mei</td><td>13:30 - 16:30</td><td>wiskunde A</td></tr><tr><td>donderdag 23 mei</td><td>13:30 - 16:30</td><td>wiskunde B</td></tr><tr><td>donderdag 23 mei</td><td>13:30 - 16:30</td><td>wiskunde C</td></tr><tr><td>vrijdag 24 mei</td><td>09:00 - 12:00</td><td>Latijn</td></tr><tr><td>vrijdag 24 mei</td><td>13:30 - 16:30</td><td>economie</td></tr><tr><td>maandag 27 mei</td><td>09:00 - 11:30</td><td>muziek</td></tr><tr><td>maandag 27 mei</td><td>13:30 - 16:00</td><td>Engels</td></tr><tr><td>dinsdag 28 mei</td><td>13:30 - 16:00</td><td>Frans</td></tr></tbody></table>                </div>    
+              </div>
+
+              <div id="Tijdvak2" class="tabcontent">
+                <h3>Tijdvak 2 <span class="close-btn" onclick="closeTab('Tijdvak2')" style="cursor: pointer;"><i>klik op mij om het tabblad te sluiten</i></span></h3>
+                <input type="text" id="myInput2" onkeyup="searchFunction('myInput2', 'myTable2')" placeholder="Zoek vak..." title="Type in a name"><br><br>
+                <div class="table-container">
+                    <table id="myTable2">
+                        <tbody><tr><th>Datum</th><th>Tijdstip</th><th>Vak</th></tr><tr><td>dinsdag 18 juni</td><td>13:30 - 16:00</td><td>Engels</td></tr><tr><td>dinsdag 18 juni</td><td>13:30 - 16:00</td><td>Frans</td></tr><tr><td>dinsdag 18 juni</td><td>13:30 - 16:30</td><td>bedrijfseconomie</td></tr><tr><td>woensdag 19 juni</td><td>09:00 - 12:00</td><td>Latijns</td></tr><tr><td>woensdag 19 juni</td><td>13:30 - 16:00</td><td>Duits</td></tr><tr><td>woensdag 19 juni</td><td>13:30 - 16:30</td><td>aardrijkskunde</td></tr><tr><td>woensdag 19 juni</td><td>13:30 - 16:30</td><td>Nederlands</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>muziek (av)</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>tekenen</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>economie</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>geschiedenis</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>wiskunde A</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>wiskunde C</td></tr><tr><td>maandag 24 juni</td><td>13:30 - 16:30</td><td>natuurkunde</td></tr><tr><td>maandag 24 juni</td><td>13:30 - 16:30</td><td>scheikunde</td></tr><tr><td>maandag 24 juni</td><td>13:30 - 16:30</td><td>wiskunde B</td></tr><tr><td>dinsdag 25 juni</td><td>13:30 - 16:30</td><td>biologie</td></tr></tbody></table>
+                </div>
+              </div>
+        </article>
+        <aside>
+            <p><b>Oefenen!</b></p>
+            <li><a href="https://www.alleexamens.nl/" target="_blank">alleexamens.nl</a></li>
+            <li><a href="https://studygo.com" target="_blank">StudyGo/WRTS</a></li>
+            <li><a href="https://www.lerenvoorhetexamen.nl/vmbo-gl-tl/overzicht/" target="_blank">lerenvoorhetexamen.nl</a></li>
+            <li><a href="https://www.desmos.com/calculator" target="_blank">Desmos (wiskunde)</a></li>
+        </aside>
+    </section>
+    <footer>
+        <p><i>@ 2024 GCvL</i></p>
+        <i>Deze website wordt beheerd door een leerling op het Griftland college</i><br>
+        <i>Het is sterk aangeraden om deze website op een Laptop, PC of iPad/Tablet scherm te bekijken.</i>
+    </footer>
+    <script>
+        function openTijdvak(evt, tijdvakName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tijdvakName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        function closeTab(tabName) {
+            document.getElementById(tabName).style.display = "none";
+            var tabButton = document.querySelector(".tablinks[data-tab='" + tabName + "']");
+            if (tabButton) {
+                tabButton.classList.remove("active");
+            }
+        }
+        function searchFunction(inputId, tableId) {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById(inputId);
+        filter = input.value.toUpperCase();
+        table = document.getElementById(tableId);
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }       
+        }
+    }
+    </script>
+    </body>
+</html>
