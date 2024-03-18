@@ -56,7 +56,8 @@ article {
 aside {
     min-width: 30%;
     max-width: 30%;
-    padding-left: 2px;
+    margin-left: 10px;
+    padding: 10px;
     background-color: white;
     color: black;
     border-left-width: 1px;
@@ -130,6 +131,9 @@ th {
     background-color: #f2f2f2;
 }
 @media screen and (max-width: 850px) {
+    body {
+        height: auto;
+    }
     section {
       width: 100%;
       display: flex;
