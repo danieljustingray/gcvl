@@ -59,13 +59,16 @@ aside {
     border-left-width: 1px;
     border-left-style: solid;
 }
+aside li {
+    color: #35964B
+}
 footer {
     background-color: beige;
     text-align: center;
     padding-top: 2px;
     padding-bottom: 2px;
     background-color: #35964B;
-    color: white;
+    color: rgb(231, 237, 241);
 }
 a {
     color: blue;
