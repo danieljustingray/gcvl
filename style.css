@@ -147,3 +147,6 @@ th {
 img {
     max-width: 100%;
 }
+hr {
+    color: lightgray;
+}
