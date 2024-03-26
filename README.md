@@ -7,3 +7,5 @@ Alle bestanden worden geprogrammeerd in Visual Studio Code, in Github.
 
 Website is:
 danieljustingray.github.io/gcvl
+OF
+http://gcvl.nl
