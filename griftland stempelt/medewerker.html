@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grided Table with Buttons</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill/dialog-polyfill.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/dialog-polyfill/dialog-polyfill.css" />
+</head>
+<body>
+<h1>Griftland stempelt voor medewerkers</h1>
+<p>Je staat ingelogd als: <span style="color: blue; font-family: monospace;">Rec;Kees Versteeg</span></p>
+<a href="index.html">Uitloggen</a>
+<table>
+<tbody>
+<tr>
+<th>Selecteer les</th>
+<th>Maandag</th>
+<th>Dinsdag</th>
+<th>Woensdag</th>
+<th>Donderdag</th>
+<th>Vrijdag</th>
+</tr>
+<tr>
+<td>Les 1</td>
+    <td><button onclick="openPopup(this)">u01</button></td>
+    <td><button onclick="openPopup(this)">u01</button></td>
+    <td><button onclick="openPopup(this)">u01</button></td>
+    <td><button onclick="openPopup(this)">u01</button></td>
+    <td><button onclick="openPopup(this)">u01</button></td>
+</tr>
+<tr>
+<td>Les 2</td>
+    <td><button onclick="openPopup(this)">u02</button></td>
+    <td><button onclick="openPopup(this)">u02</button></td>
+    <td><button onclick="openPopup(this)">u02</button></td>
+    <td><button onclick="openPopup(this)">u02</button></td>
+    <td><button onclick="openPopup(this)">u02</button></td>
+</tr>
+<tr>
+<td>Les 3</td>
+    <td><button onclick="openPopup(this)">u03</button></td>
+    <td><button onclick="openPopup(this)">u03</button></td>
+    <td><button onclick="openPopup(this)">u03</button></td>
+    <td><button onclick="openPopup(this)">u03</button></td>
+    <td><button onclick="openPopup(this)">u03</button></td>
+</tr>
+<tr>
+    <td>Les 4</td>
+    <td><button onclick="openPopup(this)">u04</button></td>
+    <td><button onclick="openPopup(this)">u04</button></td>
+    <td><button onclick="openPopup(this)">u04</button></td>
+    <td><button onclick="openPopup(this)">u04</button></td>
+    <td><button onclick="openPopup(this)">u04</button></td>
+</tr>
+<tr>
+    <td>Les 5</td>
+    <td><button onclick="openPopup(this)">u05</button></td>
+    <td><button onclick="openPopup(this)">u05</button></td>
+    <td><button onclick="openPopup(this)">u05</button></td>
+    <td><button onclick="openPopup(this)">u05</button></td>
+    <td><button onclick="openPopup(this)">u05</button></td>
+</tr>
+<tr>
+    <td>Les 6</td>
+    <td><button onclick="openPopup(this)">u06</button></td>
+    <td><button onclick="openPopup(this)">u06</button></td>
+    <td><button onclick="openPopup(this)">u06</button></td>
+    <td><button onclick="openPopup(this)">u06</button></td>
+    <td><button onclick="openPopup(this)">u06</button></td>
+</tr>
+<tr>
+    <td>Les 7</td>
+    <td><button onclick="openPopup(this)">u07</button></td>
+    <td><button onclick="openPopup(this)">u07</button></td>
+    <td><button onclick="openPopup(this)">u07</button></td>
+    <td><button onclick="openPopup(this)">u07</button></td>
+    <td><button onclick="openPopup(this)">u07</button></td>
+</tr>
+</tbody>
+</table>
+<dialog id="appointmentPopup" dialog>
+<p>Leerlingen u01 maandag (voorbeeld)</p>
+<select>
+<option>Mediatheek</option>
+</select>
+<input type="checkbox" id="126408"><label for="126408" style="color: blue; font-family: monospace;">126408;Daniel Gray</label><br>
+<input type="checkbox" id="127420"><label for="127420" style="color: blue; font-family: monospace;">127420;Henk de Jong</label>
+<button onclick="closePopup()">Close</button>
+</dialog>
+<script>
+ function openPopup(button) {
+   var popup = document.getElementById("appointmentPopup");
+   popup.showModal();
+   popup.dataset.triggerButton = button;
+ }
+ function closePopup() {
+   var popup = document.getElementById("appointmentPopup");
+   popup.close();
+ }
+ function createAppointment() {
+   var popup = document.getElementById("appointmentPopup");
+   var appointmentInput = document.getElementById("appointmentInput");
+   var locationSelect = document.getElementById("locationSelect");
+   var appointment = appointmentInput.value.trim();
+   var location = locationSelect.value;
+   if (appointment !== "") {
+     var triggerButton = popup.dataset.triggerButton;
+     triggerButton.innerText = appointment;
+     triggerButton.style.color = "black";
+     triggerButton.style.fontWeight = "normal";
+     closePopup();
+   } else {
+     alert("Voer een afspraak in.");
+   }
+ }
+</script>
+</body>
+</html>
