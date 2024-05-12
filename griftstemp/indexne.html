@@ -6,20 +6,55 @@
     <title>Griftland stempelt</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        button {
-            width: auto;
-            height: auto;
-        }
+            button {
+      position: relative;
+      display: inline-block;
+      padding: 15px 25px;
+      background-color: rgb(0, 60, 128);
+      background-image: linear-gradient(rgb(0, 60, 128),rgb(144, 235, 238));
+      border-radius: 3px;
+      box-shadow: 0px 1px 4px -2px #333;
+      text-shadow: 0px -1px #333;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      color: #fff;
+      font-size: 25px;
+      font-family: sans-serif;
+      font-weight: 100;
+      width: auto;
+    }
+    button:after{
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: calc(100% - 4px);
+      height: 50%;
+      background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+    }
+    button:hover{
+      background-image: linear-gradient(rgb(144, 235, 238),rgb(0, 60, 128));
+    }
+    button:after:hover {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: calc(100% - 4px);
+      height: 50%;
+      background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+    }
     </style>
 </head>
 <body>
     <h1>Griftland stempelt</h1>
     <form id="loginForm">
-        <label for="email">Email:</label>
+        <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" required><br><br>
-        <label for="password">Password:</label>
+        <label for="password">Wachtwoord:</label>
         <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Login</button>
+        <button type="submit">Inloggen</button>
     </form>
 
     <script>

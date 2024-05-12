@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Griftland stamps</title>
+<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill/dialog-polyfill.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/dialog-polyfill/dialog-polyfill.css" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Griftland stamps</h1>
+<p>You are logged in as: <span style="color: blue; font-family: monospace;">127420;Henk de Jong</span></p>
+<a href="indexen.html">Log out</a>
+<table>
+<tbody>
+<tr>
+<th>Select lesson</th>
+<th>Monday</th>
+<th>Tuesday</th>
+<th>Wednesday</th>
+<th>Thursday</th>
+<th>Friday</th>
+</tr>
+<tr>
+<td>Lesson 1</td>
+<td class="les">German</td>
+<td class="les">PE</td>
+<td class="les">macroeconomics</td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+</tr>
+<tr>
+<td>Lesson 2</td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td class="les">history</td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td class="les">geography</td>
+<td><button onclick="openPopup(this)">+</button></td>
+</tr>
+<tr>
+<td>Lesson 3</td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td class="les">French</td>
+</tr>
+<tr>
+<td>Lesson 4</td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td class="les">mathematics A</td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+</tr>
+<tr>
+<td>Lesson 5</td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)"><del>English</del><br>+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+</tr>
+<tr>
+<td>Lesson 6</td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td class="les">Arts & culture</td>
+<td><button onclick="openPopup(this)">+</button></td>
+</tr>
+<tr>
+<td>Lesson 7</td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+<td><button onclick="openPopup(this)">+</button></td>
+</tr>
+</tbody>
+</table>
+<dialog id="appointmentPopup" dialog>
+<p>Fill in the appointment:</p>
+<input type="text" id="appointmentInput">
+<p>Select location:</p>
+<select id="locationSelect">
+<option value="Mediatheek">Library</option>
+<option value="samenwerkingslokaal">Work together room</option>
+<option value="talenlab">Language lab</option>
+<option value="werklokaal">Work room</option>
+<option value="betalab">Lab</option>
+</select>
+<button onclick="createAppointment()">Create appointment</button>
+<button onclick="closePopup()">Cancel</button> <!-- Added close button -->
+</dialog>
+<script>
+ function openPopup(button) {
+   var popup = document.getElementById("appointmentPopup");
+   popup.showModal();
+   // Store the button element that triggered the popup
+   popup.dataset.triggerButton = button;
+ }
+ function closePopup() {
+   var popup = document.getElementById("appointmentPopup");
+   popup.close();
+ }
+ function createAppointment() {
+   var popup = document.getElementById("appointmentPopup");
+   var appointmentInput = document.getElementById("appointmentInput");
+   var locationSelect = document.getElementById("locationSelect");
+   var appointment = appointmentInput.value.trim();
+   var location = locationSelect.value;
+   if (appointment !== "") {
+     var triggerButton = popup.dataset.triggerButton;
+     triggerButton.innerText = appointment;
+     triggerButton.style.color = "black";
+     triggerButton.style.fontWeight = "normal";
+     closePopup();
+   } else {
+     alert("Fill in appointment");
+   }
+ }
+</script>
+</body>
+</html>

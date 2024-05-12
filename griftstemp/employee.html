@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Griftland stamps</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/dialog-polyfill/dialog-polyfill.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/dialog-polyfill/dialog-polyfill.css" />
+</head>
+<body>
+<h1>Griftland stamps for employees</h1>
+<p>You are logged in as: <span style="color: blue; font-family: monospace;">Principal;Kees Versteeg</span></p>
+<a href="index.html">Log out</a>
+<table>
+<tbody>
+<tr>
+<th>Select lesson</th>
+<th>Monday</th>
+<th>Tuesday</th>
+<th>Wednesday</th>
+<th>Thursday</th>
+<th>Friday</th>
+</tr>
+<tr>
+<td>Lesson 1</td>
+    <td><button onclick="openPopup(this)">u01</button></td>
+    <td><button onclick="openPopup(this)">u01</button></td>
+    <td><button onclick="openPopup(this)">u01</button></td>
+    <td><button onclick="openPopup(this)">u01</button></td>
+    <td><button onclick="openPopup(this)">u01</button></td>
+</tr>
+<tr>
+<td>Lesson 2</td>
+    <td><button onclick="openPopup(this)">u02</button></td>
+    <td><button onclick="openPopup(this)">u02</button></td>
+    <td><button onclick="openPopup(this)">u02</button></td>
+    <td><button onclick="openPopup(this)">u02</button></td>
+    <td><button onclick="openPopup(this)">u02</button></td>
+</tr>
+<tr>
+<td>Lesson 3</td>
+    <td><button onclick="openPopup(this)">u03</button></td>
+    <td><button onclick="openPopup(this)">u03</button></td>
+    <td><button onclick="openPopup(this)">u03</button></td>
+    <td><button onclick="openPopup(this)">u03</button></td>
+    <td><button onclick="openPopup(this)">u03</button></td>
+</tr>
+<tr>
+    <td>Lesson 4</td>
+    <td><button onclick="openPopup(this)">u04</button></td>
+    <td><button onclick="openPopup(this)">u04</button></td>
+    <td><button onclick="openPopup(this)">u04</button></td>
+    <td><button onclick="openPopup(this)">u04</button></td>
+    <td><button onclick="openPopup(this)">u04</button></td>
+</tr>
+<tr>
+    <td>Lesson 5</td>
+    <td><button onclick="openPopup(this)">u05</button></td>
+    <td><button onclick="openPopup(this)">u05</button></td>
+    <td><button onclick="openPopup(this)">u05</button></td>
+    <td><button onclick="openPopup(this)">u05</button></td>
+    <td><button onclick="openPopup(this)">u05</button></td>
+</tr>
+<tr>
+    <td>Lesson 6</td>
+    <td><button onclick="openPopup(this)">u06</button></td>
+    <td><button onclick="openPopup(this)">u06</button></td>
+    <td><button onclick="openPopup(this)">u06</button></td>
+    <td><button onclick="openPopup(this)">u06</button></td>
+    <td><button onclick="openPopup(this)">u06</button></td>
+</tr>
+<tr>
+    <td>Lesson 7</td>
+    <td><button onclick="openPopup(this)">u07</button></td>
+    <td><button onclick="openPopup(this)">u07</button></td>
+    <td><button onclick="openPopup(this)">u07</button></td>
+    <td><button onclick="openPopup(this)">u07</button></td>
+    <td><button onclick="openPopup(this)">u07</button></td>
+</tr>
+</tbody>
+</table>
+<dialog id="appointmentPopup" dialog>
+<p>Students lesson 1 Monday (example)</p>
+<select>
+  <option value="Mediatheek">Library</option>
+  <option value="samenwerkingslokaal">Work together room</option>
+  <option value="talenlab">Language lab</option>
+  <option value="werklokaal">Work room</option>
+  <option value="betalab">Lab</option>
+</select>
+<input type="checkbox" id="126408"><label for="126408" style="color: blue; font-family: monospace;">126408;Daniel Gray</label><br>
+<input type="checkbox" id="127420"><label for="127420" style="color: blue; font-family: monospace;">127420;Henk de Jong</label>
+<button onclick="closePopup()">Close</button>
+</dialog>
+<script>
+ function openPopup(button) {
+   var popup = document.getElementById("appointmentPopup");
+   popup.showModal();
+   popup.dataset.triggerButton = button;
+ }
+ function closePopup() {
+   var popup = document.getElementById("appointmentPopup");
+   popup.close();
+ }
+ function createAppointment() {
+   var popup = document.getElementById("appointmentPopup");
+   var appointmentInput = document.getElementById("appointmentInput");
+   var locationSelect = document.getElementById("locationSelect");
+   var appointment = appointmentInput.value.trim();
+   var location = locationSelect.value;
+   if (appointment !== "") {
+     var triggerButton = popup.dataset.triggerButton;
+     triggerButton.innerText = appointment;
+     triggerButton.style.color = "black";
+     triggerButton.style.fontWeight = "normal";
+     closePopup();
+   } else {
+     alert("Fill in appointment");
+   }
+ }
+</script>
+</body>
+</html>
