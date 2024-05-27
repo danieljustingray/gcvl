@@ -1,55 +1,31 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thuis - GVcL</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="images/x-icon" href="images/favicon.png">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-placeholder').innerHTML = data;
+                });
+        });
+    </script>
 </head>
 <body>
 <container class="page-content">
     <header>
         <a href="index.html"><img src="images/logo.png" width="425px" height="100px"></a>
     </header>
-    <nav>
-        <a href="aboutus.html">Over ons</a> |
-        <div class="dropdown">
-            <button class="dropbtn">Examens</button> | 
-            <div class="dropdown-content">
-                <a href="examens/vmbo.html">vmbo-tl/mavo</a>
-                <a href="examens/havo.html">havo</a>
-                <a href="examens/vwo.html">vwo</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Onderbouw</button> | 
-            <div class="dropdown-content">
-                <a href="onderbouw/brugklas.html">Brugklas</a>
-                <a href="onderbouw/vmbo2-3-4.html">vmbo-tl/mavo 2</a>
-                <a href="onderbouw/havo2-3.html">havo 2-3</a>
-                <a href="onderbouw/vwo2-3.html">vwo(xtra) 2-3</a>
-            </div>
-    </div>
-    <div>
-        <div class="dropdown">
-            <button class="dropbtn">Activiteiten</button> | 
-            <div class="dropdown-content">
-                <a href="activiteiten/vrijdagmiddag.html">Vrijdagmiddagactiviteiten</a>
-                <a href="activiteiten/iteam.html">het iTeam</a>
-                <a href="activiteiten/Sportraad.html">Sportraad</a>
-                <a href="muziektheater.html">Muziektheater</a>
-            </div>
-        </div>
-    </div>
-    <a href="zorg.html">Zorg</a>
-    </nav>
+    <div id="navbar-placeholder"></div>
     <section>
         <article>
             <h2>Welkom op het website van een leerling voor leerlingen op het Griftland!</h2>
             <p>Hier kan je een hoop actuele informatie vinden over het GC, en een hoop leermiddelen.</p>
             <p>Website is nog niet af!</p>
+            <p><a href="griftstemp/index.html">Dit</a> is een prototype voor een digitale stempelsysteem. Als leerling kan je inloggen met <span style="font-family: monospace;">127420@leerlingen.griftland.nl</span> en als wachtwoord gewoon <span style="font-family: monospace;">wachtwoord</span>.</p>
         </article>
         <aside>
             <p><b>Handige linkjes</b></p>
