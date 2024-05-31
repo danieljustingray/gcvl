@@ -113,6 +113,7 @@ aside {
 }
 aside li {
     color: #35964B;
+    list-style: none;
 }
 footer {
     background-color: beige;
@@ -151,9 +152,12 @@ th {
         flex-direction: column;
     }
     aside {
-        min-width: 100%;
+        min-width: 95%;
         border: none;
         margin-left: 0;
+    }
+    article {
+        width: 95%;
     }
 }
 @media screen and (max-width: 500px) {
@@ -165,3 +169,13 @@ img {
 hr {
     color: lightgray;
 }
+.iconimg {
+    width: 37.5px; 
+    height: 37.5px;
+    display: block;
+}
+.iconimg img {
+    width: 30px; 
+    height: 30px;
+}
+.iconimg img:hover {width: 37.5px; height: 37.5px;}
