@@ -133,6 +133,7 @@ a:hover {
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 th, td {
     border: 1px solid #000;
@@ -160,9 +161,8 @@ th {
         width: 95%;
     }
 }
-@media screen and (max-width: 500px) {
-nav {display: block;
-}}
+@media screen and (max-width: 600px) {
+nav {display: block;}}
 img {
     max-width: 100%;
 }
@@ -179,3 +179,7 @@ hr {
     height: 30px;
 }
 .iconimg img:hover {width: 37.5px; height: 37.5px;}
+details {
+    border: 1px solid rgb(0, 56, 131);
+    padding: 4px;
+}
