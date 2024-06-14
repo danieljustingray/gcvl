@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuis - GVcL</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="images/x-icon" href="../images/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<container class="page-content">
+    <header>
+        <a href="../index.html"><img src="../images/logo.png" width="425px" height="100px"></a>
+    </header>
+        <!--Navbar-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="../script.js"></script>
+        <div id="navbar-placeholder"></div>
+    <section>
+        <article>
+            <h2>Alle vakken</h2>
+            <input type="text" id="myInput" onkeyup="searchBar()" placeholder="Zoek vak" title="Zoek vak">
+            <table id="myTable">
+            <tr class="header">
+                <th style="width:75%;">Vak titel</th>
+                <th style="width:25%;">Afkorting</th>
+            </tr>
+            <tr>
+                <td><a href="ak.html">aardrijkskunde</a></td>
+                <td>ak</td>
+            </tr>
+            <tr>
+                <td><a href="be.html">bedrijfseconomie</a></td>
+                <td>be</td>
+            </tr>
+            <tr>
+                <td><a href="bha.html">examenvak handvaardigheid</a></td>
+                <td>bha</td>
+            </tr>
+            <tr>
+                <td><a href="bi.html">biologie</a></td>
+                <td>bi</td>
+            </tr>
+            <tr>
+                <td><a href="biol.html">biologie (bovenbouw)</a></td>
+                <td>biol</td>
+            </tr>
+            <tr>
+                <td><a href="bte.html">examenvak tekenen</a></td>
+                <td>bte</td>
+            </tr>
+            <tr>
+                <td><a href="cae.html">cambridge Engels</a></td>
+                <td>cae</td>
+            </tr>            
+            <tr>
+                <td>Paris specialites</td>
+                <td>France</td>
+            </tr>
+            </table>
+        </article>
+        <aside>
+            <p>Lorem ipsum dolor sit amet</p>
+        </aside>
+    </section>
+    <footer>
+        <p><i>@ 2024 GCvL</i></p>
+        <i>Deze website wordt beheerd door een leerling op het Griftland college.</i><br>
+        <i>Het is sterk aangeraden om deze website op een Laptop, PC of iPad/Tablet scherm te bekijken.</i>
+    </footer>
+</container>
+<script>
+    function searchBar() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+            }       
+        }
+    }
+    </script>
+</body>
+</html>
