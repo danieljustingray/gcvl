@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boxplot Generator</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <container class="page-content">
+        <header>
+            <a href="../index.html"><img src="../images/logo.png" width="425px" height="100px"></a>
+        </header>
+        <section>
+            <article>
+                <h2>Boxplot Generator</h2>
+                <label for="dataInput">Voer gegevens in (getallen gescheiden door ; met , voor decimalen):</label><br>
+                <input type="text" id="dataInput" size="50"><br><br>
+                <button onclick="generateBoxPlot()">Genereer Boxplot</button>
+                <div id="boxplot"></div>
+                <p id="statistics"></p>
+                <p>Zo nodig kan je hier puntjes vervangen met een komma en getallenscheiding aanvullen met een puntkomma.</p>
+                <input type="text" id="inputField" placeholder="Voer getallen gescheiden door punten of spaties in...">
+                <button onclick="transformInput()">Transformeer</button>
+                <button onclick="copyNumbers()">Kopieer Getallen</button>                
+            </article>
+            <aside>
+                <button onclick="history.back()">Ga terug</button>
+            </aside>
+        </section>
+        <footer>
+            <p><i>@ 2024 GCvL</i></p>
+            <i>Deze website wordt beheerd door een leerling op het Griftland college.</i><br>
+            <i>Het is sterk aanbevolen om deze website op een laptop, PC of iPad/Tablet scherm te bekijken.</i>
+        </footer>
+    </container>
+    <script src="script.js"></script>
+</body>
+</html>
