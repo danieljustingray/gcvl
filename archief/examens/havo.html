@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vwo examens - GVcL</title>
-    <link rel="stylesheet" href="../style.css">
+    <title>havo examens - GVcL</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="images/x-icon" href="../images/favicon.png">
     <style>
         .table-container {
@@ -49,13 +49,10 @@
     <header>
         <a href="../index.html"><img src="../images/logo.png" width="425px" height="100px"></a>
     </header>
-      <!--Navbar-->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <script src="../script.js"></script>
-      <div id="navbar-placeholder"></div>    
-      <section>
+    <section>
         <article>
-            <h2>vwo</h2>
+            <a href="examens.html">ga terug</a>
+            <h2>Havo</h2>
             <h3>Examenroosters</h3>
             <a href="examenrooster_havo_gc.xlsx" download>
                 <p>Download als Excel (.xlsx) bestand (7 kb)</p>
@@ -69,8 +66,8 @@
                 <h3>Tijdvak 1 <span class="close-btn" onclick="closeTab('Tijdvak1')" style="cursor: pointer;"><i>klik op mij om het tabblad te sluiten</i></span></h3>
                 <input type="text" id="myInput1" onkeyup="searchFunction('myInput1', 'myTable1')" placeholder="Zoek vak..." title="Type in a name"><br><br>
                 <div class="table-container">
-                    <table id="myTable1">
-                        <tbody><tr><th>Datum</th><th>Tijdstip</th><th>Vak</th></tr><tr><td>dinsdag 14 mei</td><td>13:30 - 16:30</td><td>biologie</td></tr><tr><td>woensdag 15 mei</td><td>13:30 - 16:30</td><td>Nederlands</td></tr><tr><td>donderdag 16 mei</td><td>13:30 - 16:30</td><td>natuurkunde</td></tr><tr><td>vrijdag 17 mei</td><td>09:00 - 11:30</td><td>Duits</td></tr><tr><td>vrijdag 17 mei</td><td>13:30 - 16:30</td><td>aardrijkskunde</td></tr><tr><td>dinsdag 21 mei</td><td>09:00 - 12:00</td><td>geschiedenis</td></tr><tr><td>dinsdag 21 mei</td><td>13:30 - 16:30</td><td>scheikunde</td></tr><tr><td>woensdag 22 mei</td><td>09:00 - 11:30</td><td>tekenen</td></tr><tr><td>woensdag 22 mei</td><td>13:30 - 16:30</td><td>bedrijfseconomie</td></tr><tr><td>donderdag 23 mei</td><td>13:30 - 16:30</td><td>wiskunde A</td></tr><tr><td>donderdag 23 mei</td><td>13:30 - 16:30</td><td>wiskunde B</td></tr><tr><td>donderdag 23 mei</td><td>13:30 - 16:30</td><td>wiskunde C</td></tr><tr><td>vrijdag 24 mei</td><td>09:00 - 12:00</td><td>Latijn</td></tr><tr><td>vrijdag 24 mei</td><td>13:30 - 16:30</td><td>economie</td></tr><tr><td>maandag 27 mei</td><td>09:00 - 11:30</td><td>muziek</td></tr><tr><td>maandag 27 mei</td><td>13:30 - 16:00</td><td>Engels</td></tr><tr><td>dinsdag 28 mei</td><td>13:30 - 16:00</td><td>Frans</td></tr></tbody></table>                </div>    
+                    <table id="myTable1"><tbody><tr><th class="header">Datum</th><th class="header">Tijdstip</th><th class="header">Vak</th></tr><tr><td>dinsdag 14 mei</td><td>09:00 - 11:30</td><td>muziek</td></tr><tr><td>dinsdag 14 mei</td><td>13:30 - 16:30</td><td>wiskunde A</td></tr><tr><td>dinsdag 14 mei</td><td>13:30 - 16:30</td><td>wiskunde B</td></tr><tr><td>woensdag 15 mei</td><td>09:00 - 11:30</td><td>Duits</td></tr><tr><td>woensdag 15 mei</td><td>13:30 - 16:30</td><td>economie</td></tr><tr><td>donderdag 16 mei</td><td>09:00 - 12:00</td><td>geschiedenis</td></tr><tr><td>donderdag 16 mei</td><td>13:30 - 16:30</td><td>scheikunde</td></tr><tr><td>vrijdag 17 mei</td><td>13:30 - 16:30</td><td>Nederlands</td></tr><tr><td>dinsdag 21 mei</td><td>13:30 - 16:00</td><td>Engels</td></tr><tr><td>woensdag 22 mei</td><td>13:30 - 16:00</td><td>Frans</td></tr><tr><td>donderdag 23 mei</td><td>13:30 - 16:30</td><td>aardrijkskunde</td></tr><tr><td>vrijdag 24 mei</td><td>09:00 - 11:30</td><td>tekenen</td></tr><tr><td>vrijdag 24 mei</td><td>13:30 - 16:30</td><td>natuurkunde</td></tr><tr><td>maandag 27 mei</td><td>13:30 - 16:30</td><td>bedrijfseconomie</td></tr><tr><td>dinsdag 28 mei</td><td>13:30 - 16:30</td><td>biologie</td></tr></tbody></table>
+                </div>    
               </div>
 
               <div id="Tijdvak2" class="tabcontent">
@@ -78,7 +75,7 @@
                 <input type="text" id="myInput2" onkeyup="searchFunction('myInput2', 'myTable2')" placeholder="Zoek vak..." title="Type in a name"><br><br>
                 <div class="table-container">
                     <table id="myTable2">
-                        <tbody><tr><th>Datum</th><th>Tijdstip</th><th>Vak</th></tr><tr><td>dinsdag 18 juni</td><td>13:30 - 16:00</td><td>Engels</td></tr><tr><td>dinsdag 18 juni</td><td>13:30 - 16:00</td><td>Frans</td></tr><tr><td>dinsdag 18 juni</td><td>13:30 - 16:30</td><td>bedrijfseconomie</td></tr><tr><td>woensdag 19 juni</td><td>09:00 - 12:00</td><td>Latijns</td></tr><tr><td>woensdag 19 juni</td><td>13:30 - 16:00</td><td>Duits</td></tr><tr><td>woensdag 19 juni</td><td>13:30 - 16:30</td><td>aardrijkskunde</td></tr><tr><td>woensdag 19 juni</td><td>13:30 - 16:30</td><td>Nederlands</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>muziek (av)</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>tekenen</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>economie</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>geschiedenis</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>wiskunde A</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>wiskunde C</td></tr><tr><td>maandag 24 juni</td><td>13:30 - 16:30</td><td>natuurkunde</td></tr><tr><td>maandag 24 juni</td><td>13:30 - 16:30</td><td>scheikunde</td></tr><tr><td>maandag 24 juni</td><td>13:30 - 16:30</td><td>wiskunde B</td></tr><tr><td>dinsdag 25 juni</td><td>13:30 - 16:30</td><td>biologie</td></tr></tbody></table>
+                        <tbody><tr><th>Datum</th><th>Tijdstip</th><th>Vak</th></tr><tr><td>dinsdag 18 juni</td><td>13:30 - 16:00</td><td>Engels</td></tr><tr><td>dinsdag 18 juni</td><td>13:30 - 16:00</td><td>Frans</td></tr><tr><td>dinsdag 18 juni</td><td>13:30 - 16:30</td><td>bedrijfseconomie</td></tr><tr><td>woensdag 19 juni</td><td>13:30 - 16:00</td><td>Duits</td></tr><tr><td>woensdag 19 juni</td><td>13:30 - 16:30</td><td>aardrijkskunde</td></tr><tr><td>woensdag 19 juni</td><td>13:30 - 16:30</td><td>Nederlands</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:00</td><td>muziek (av)</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:30</td><td>economie</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:30</td><td>geschiedenis</td></tr><tr><td>donderdag 20 juni</td><td>13:30 - 16:30</td><td>wiskunde A</td></tr><tr><td>vrijdag 21 juni</td><td>09:00 - 11:30</td><td>tekenen</td></tr><tr><td>maandag 24 juni</td><td>13:30 - 16:30</td><td>scheikunde</td></tr><tr><td>maandag 24 juni</td><td>13:30 - 16:30</td><td>wiskunde B</td></tr><tr><td>dinsdag 25 juni</td><td>13:30 - 16:30</td><td>biologie</td></tr></tbody></table>
                 </div>
               </div>
         </article>

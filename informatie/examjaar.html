@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thuis - GVcL</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="images/x-icon" href="../images/favicon.png">
+</head>
+<body>
+<container class="page-content">
+    <header>
+        <a href="../index.html"><img src="../images/logo.png" width="425px" height="100px"></a>
+    </header>
+        <!--Navbar-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="../script.js"></script>
+        <div id="navbar-placeholder"></div>
+    <section>
+        <article>
+            <h2>Je examenjaar berekenen</h2>
+            <label for="birthYear">Toets je geboortejaar in:</label>
+            <input type="number" id="birthYear" placeholder="2009, bijvoorbeeld"><br><br>
+            
+            <label for="level">Selecteer je niveau:</label>
+            <select id="level">
+                <option value="vmbo">VMBO</option>
+                <option value="havo">HAVO</option>
+                <option value="vwo">VWO</option>
+            </select><br><br>
+            
+            <button onclick="calculateExamYear()">Bereken examenjaar</button>   
+            <p id="result"></p>
+        </article>
+        <aside>
+            <a href="leeftijden.html">Leeftijden</a>
+        </aside>
+    </section>
+    <footer>
+        <p><i>@ 2024 GCvL</i></p>
+        <i>Deze website wordt beheerd door een leerling op het Griftland college.</i><br>
+        <i>Het is sterk aangeraden om deze website op een Laptop, PC of iPad/Tablet scherm te bekijken.</i>
+    </footer>
+    <script>
+        function calculateExamYear() {
+            const birthYear = parseInt(document.getElementById('birthYear').value);
+            const level = document.getElementById('level').value;
+            const primarySchoolYears = 8;
+            let highSchoolYears;
+            if (level === 'vmbo') {
+                highSchoolYears = 4;
+            } else if (level === 'havo') {
+                highSchoolYears = 5;
+            } else if (level === 'vwo') {
+                highSchoolYears = 6;
+            }
+            const examYear = 4 + birthYear + primarySchoolYears + highSchoolYears;
+            document.getElementById('result').innerText = `Je zult je examen afleggen in: ${examYear}`;
+        }
+    </script>
+</container>
+</body>
+</html>

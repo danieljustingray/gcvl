@@ -93,3 +93,31 @@ function copyNumbers() {
 
     inputField.blur();
 }
+
+document.getElementById('count-button').addEventListener('click', async () => {
+    const url = document.getElementById('url-input').value;
+    if (!url) {
+      alert('Please enter a URL.');
+      return;
+    }
+  
+    try {
+      const response = await fetch(url);
+      const text = await response.text();
+      const wordCount = countWords(stripHTML(text));
+      document.getElementById('result').textContent = `Word Count: ${wordCount}`;
+    } catch (error) {
+      console.error('Error fetching the URL:', error);
+      document.getElementById('result').textContent = 'Error fetching the URL.';
+    }
+  });
+  
+  function stripHTML(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+  }
+  
+  function countWords(text) {
+    return text.split(/\s+/).filter(word => word.length > 0).length;
+  }
+  

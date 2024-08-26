@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodiek Verband: Sinusfunctie</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <container class="page-content">
+        <header>
+            <a href="index.html"><img src="../images/logo.png" width="425px" height="100px"></a>
+        </header>
+            <!--Navbar-->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="../script.js"></script>
+            <div id="navbar-placeholder"></div>        
+        <section>
+            <article>
+                <h2>Periodiek Verband: Sinusfunctie</h2>
+                <form id="parametersForm">
+                    <label for="equilibrium">Evenwichtsstand:</label>
+                    <input type="number" id="equilibrium" step="0.1" value="0">
+                    <br><br>
+                    <label for="amplitude">Amplitude:</label>
+                    <input type="number" id="amplitude" step="0.1" value="1">
+                    <br><br>
+                    <label for="period">Periode:</label>
+                    <input type="number" id="period" step="0.1" value="2">
+                    <br><br>
+                    <button type="button" onclick="updateSinusPlot()">Update Grafiek</button>
+                </form>
+                <div id="sinusPlot"></div>
+            </article>
+            <aside>
+                <p>Hier kan tekst of extra informatie staan.</p>
+            </aside>
+        </section>
+        <footer>
+            <p><i>@ 2024 GCvL</i></p>
+            <i>Deze website wordt beheerd door een leerling op het Griftland college.</i><br>
+            <i>Het is sterk aanbevolen om deze website op een laptop, PC of iPad/Tablet scherm te bekijken.</i>
+        </footer>
+    </container>
+
+    <script>
+        // Functie om sinusgrafiek te genereren met aangepaste parameters
+        function updateSinusPlot() {
+            // Haal waarden op vanuit het formulier
+            const equilibrium = parseFloat(document.getElementById('equilibrium').value);
+            const amplitude = parseFloat(document.getElementById('amplitude').value);
+            const period = parseFloat(document.getElementById('period').value);
+
+            // Genereer x-waarden voor de grafiek (van -100 tot 100 met stapgrootte 0.1)
+            const xValues = generateXValues(-100, 100, 0.1);
+
+            // Bereken y-waarden op basis van sinusfunctie met aangepaste parameters
+            const yValues = xValues.map(x => equilibrium + amplitude * Math.sin(2 * Math.PI * (x / period)));
+
+            // Plot gegevens en update grafiek
+            const plotData = [{
+                x: xValues,
+                y: yValues,
+                type: 'scatter',
+                mode: 'lines',
+                line: { color: 'blue' },
+                name: `y = ${amplitude} * sin(2π(x / ${period})) + ${equilibrium}`
+            }];
+
+            const layout = {
+                title: `Sinusfunctie: y = ${amplitude} * sin(2π(x / ${period})) + ${equilibrium}`,
+                xaxis: { title: 'x', range: [-100, 100], fixedrange: false },
+                yaxis: { title: 'y' },
+                margin: { t: 50, r: 20, b: 70, l: 70 } // Aanpassen indien nodig
+            };
+
+            // Nieuwe grafiek maken met Plotly.js
+            Plotly.newPlot('sinusPlot', plotData, layout);
+        }
+
+        // Functie om een array van x-waarden te genereren
+        function generateXValues(start, end, step) {
+            const xValues = [];
+            for (let x = start; x <= end; x += step) {
+                xValues.push(x);
+            }
+            return xValues;
+        }
+
+        // Roep updateSinusPlot aan bij het laden van de pagina
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSinusPlot();
+        });
+    </script>
+</body>
+</html>
