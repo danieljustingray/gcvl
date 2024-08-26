@@ -161,7 +161,7 @@ th {
         width: 95%;
     }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
 nav {display: block;}}
 img {
     max-width: 100%;

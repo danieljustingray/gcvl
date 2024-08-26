@@ -19,7 +19,7 @@
     <section>
         <article>
             <h2>Je examenjaar berekenen</h2>
-            <label for="birthYear">Toets je geboortejaar in:</label>
+            <label for="birthYear">Vul je geboortejaar in:</label>
             <input type="number" id="birthYear" placeholder="2009, bijvoorbeeld"><br><br>
             
             <label for="level">Selecteer je niveau:</label>
@@ -28,7 +28,8 @@
                 <option value="havo">HAVO</option>
                 <option value="vwo">VWO</option>
             </select><br><br>
-            
+            <label for="resits">Hoeveel jaar je bent blijven zitten (als je bent blijven zitten)</label>
+            <input type="numer" id="resits" placeholder="1, bijvoorbeeld">
             <button onclick="calculateExamYear()">Bereken examenjaar</button>   
             <p id="result"></p>
         </article>
@@ -44,6 +45,7 @@
     <script>
         function calculateExamYear() {
             const birthYear = parseInt(document.getElementById('birthYear').value);
+            const resits = parseInt(document.getElementById('resits').value);
             const level = document.getElementById('level').value;
             const primarySchoolYears = 8;
             let highSchoolYears;
@@ -54,7 +56,7 @@
             } else if (level === 'vwo') {
                 highSchoolYears = 6;
             }
-            const examYear = 4 + birthYear + primarySchoolYears + highSchoolYears;
+            const examYear = 4 + birthYear + primarySchoolYears + highSchoolYears + resits;
             document.getElementById('result').innerText = `Je zult je examen afleggen in: ${examYear}`;
         }
     </script>
