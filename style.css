@@ -34,7 +34,7 @@ header a:hover {
 }
 nav {
     background-color: rgb(153, 194, 28);
-    background-image: linear-gradient(to bottom right, rgb(153, 194, 28), rgb(188, 228, 70));
+    background-image: linear-gradient(to right, rgb(153, 194, 28), rgb(188, 228, 70), rgb(153, 194, 28));
     padding-bottom: 3px;
     padding-top: 3px;
     color: white;
