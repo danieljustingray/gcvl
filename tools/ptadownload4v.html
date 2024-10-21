@@ -4,74 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embed PDF with Predefined Labels</title>
+    <link rel="stylesheet" href="../style.css">
     <style>
-        body { font-family: Arial, sans-serif; }
-        #pdf-embed { width: 100%; height: 600px; border: 1px solid #ccc; }
-        .page-container { margin-top: 20px; }
-        .page-label { margin-right: 10px; font-weight: bold; }
+        .pdf-container {
+            position: relative;
+            flex-grow: 1;
+            overflow: hidden;
+            background-color: rgb(231, 237, 241);
+        }
+
+        #pdf-embed {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc;
+        }
+
+        .resizer {
+            width: 10px;
+            background: #ccc;
+            cursor: ew-resize;
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+        }
+
+        .page-container {
+            margin: 10px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #f1f1f1;
+        }
     </style>
 </head>
 <body>
-    <h1>View and Select Pages from PDF</h1>
-
-    <!-- Embed the PDF directly -->
-    <embed id="pdf-embed" src="ptas-4vwo-2425.pdf" type="application/pdf">
-
-    <!-- Predefined labels and selection -->
-    <div id="page-labels">
-        <h3>Select Pages by Label</h3>
-        <div id="label-container"></div>
+    <div class="page-content">
+        <header>
+            <a href="../index.html"><img src="../images/logo.png" width="425px" height="100px" alt="Logo"></a>
+        </header>
+        <!--Navbar-->
+        <div id="navbar-placeholder"></div>
+        <section>
+            <article>
+                <div class="pdf-container">
+                    <embed id="pdf-embed" src="bijlagen/ptas-4vwo-2425.pdf" type="application/pdf">
+                    <div class="resizer"></div>
+                </div>
+                <div id="page-labels">
+                    <h3>Selecteer vakken</h3>
+                    <div id="label-container"></div>
+                </div>
+                <div class="page-container">
+                    <input type="checkbox" id="appendix-checkbox" />
+                    <label for="appendix-checkbox" class="page-label">Download bijlage (Engels en LO toelichting)</label>
+                </div>
+                <div id="selected-pages">
+                    <button id="download-selected">Download PDF</button>
+                </div>
+            </article>
+            <aside>
+                <button onclick="history.back()">Ga terug</button>
+            </aside>
+        </section>
+        <footer>
+            <p><i>@ 2024 GCvL</i></p>
+            <i>Deze website wordt beheerd door een leerling op het Griftland college.</i><br>
+            <i>Het is sterk aanbevolen om deze website op een laptop, PC of iPad/Tablet scherm te bekijken.</i>
+        </footer>
     </div>
-
-    <!-- Checkbox for downloading the appendix -->
-    <div class="page-container">
-        <input type="checkbox" id="appendix-checkbox" />
-        <label for="appendix-checkbox" class="page-label">Download bijlage (Engels en LO toelichting))</label>
-    </div>
-
-    <!-- Button to download selected pages -->
-    <div id="selected-pages">
-        <button id="download-selected">Download Selected Pages</button>
-    </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script>
-        const pdfUrl = "ptas-4vwo-2425.pdf"; // Path to the embedded PDF file
+        const pdfUrl = "bijlagen/ptas-4vwo-2425.pdf";
 
-        // Predefined labels for each page
         const pageLabels = [
-            "aardrijkskunde",  // Page 1 label
-            "bedrijfseconomie",    // Page 2 label
-            "biology",        // Page 3 label
-            "ckv",        // Page 4 label
-            "Duits",      // Page 5 label
-            "economie",          // Page 6 label
-            "Engels 1",     // Page 7 label
-            "Engels 2 (beide aanvinken)",          // Page 8 label
-            "Frans 1",      // Page 9 label
-            "Frans 2 (beide aanvinken)",           // Page 10 label
-            "geschiedenis",      // Page 11 label
-            "identiteit en maatschappij", // Page 12 label
-            "informatica", // Page 13 label
-            "Latijn",     // Page 14 label
-            "LO",     // Page 15 label
-            "muziek",   // Page 16 label
-            "natuurkunde",       // Page 17 label
-            "natuur leven technologie",  // Page 18 label
-            "Nederlands",       // Page 19 label
-            "scheikunde",   // Page 20 label
-            "tekenen",        // Page 21 label
-            "vaardigheid B-vakken",   // Page 22 label
-            "wiskunde A", // Page 23 label
-            "wiskunde B", // Page 24 label
-            "wiskunde C",    // Page 25 label
-            "Wiskunde D"     // Page 26 label
+            "aardrijkskunde",
+            "bedrijfseconomie",
+            "biology",
+            "ckv",
+            "Duits",
+            "economie",
+            "Engels 1",
+            "Engels 2 (beide aanvinken)",
+            "Frans 1",
+            "Frans 2 (beide aanvinken)",
+            "geschiedenis",
+            "identiteit en maatschappij",
+            "informatica",
+            "Latijn",
+            "LO",
+            "muziek",
+            "natuurkunde",
+            "natuur leven technologie",
+            "Nederlands",
+            "scheikunde",
+            "tekenen",
+            "vaardigheid B-vakken",
+            "wiskunde A",
+            "wiskunde B",
+            "wiskunde C",
+            "Wiskunde D"
         ];
 
         const labelContainer = document.getElementById('label-container');
-        const numPages = pageLabels.length; // Number of predefined labels
+        const numPages = pageLabels.length;
 
-        // Render predefined labels and checkboxes
         for (let i = 0; i < numPages; i++) {
             const pageDiv = document.createElement('div');
             pageDiv.classList.add('page-container');
@@ -90,7 +129,6 @@
             labelContainer.appendChild(pageDiv);
         }
 
-        // Handle downloading selected pages
         document.getElementById('download-selected').addEventListener('click', async function() {
             const selectedPageNumbers = [];
             for (let i = 1; i <= numPages; i++) {
@@ -100,7 +138,6 @@
                 }
             }
 
-            // Check if the appendix checkbox is selected
             if (document.getElementById('appendix-checkbox').checked) {
                 for (let i = 27; i <= 32; i++) {
                     selectedPageNumbers.push(i);
@@ -115,7 +152,6 @@
             }
         });
 
-        // Create a new PDF containing selected pages
         async function createNewPdf(pages) {
             const pdfBytes = await fetch(pdfUrl).then(res => res.arrayBuffer());
             const existingPdf = await PDFLib.PDFDocument.load(pdfBytes);
@@ -130,13 +166,36 @@
             return pdfBytesNew;
         }
 
-        // Trigger download of the new PDF
         function downloadPdf(pdfBytes) {
             const blob = new Blob([pdfBytes], { type: 'application/pdf' });
             const link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
-            link.download = 'selected_pages.pdf';
+            link.download = 'pta4v.pdf';
             link.click();
+        }
+
+        const resizer = document.querySelector('.resizer');
+        const pdfContainer = document.querySelector('.pdf-container');
+
+        let isResizing = false;
+
+        resizer.addEventListener('mousedown', (event) => {
+            isResizing = true;
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        });
+
+        function handleMouseMove(event) {
+            if (isResizing) {
+                const newWidth = event.clientX - pdfContainer.getBoundingClientRect().left;
+                pdfContainer.style.width = newWidth + 'px';
+            }
+        }
+
+        function handleMouseUp() {
+            isResizing = false;
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
         }
     </script>
 </body>
