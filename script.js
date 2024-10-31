@@ -14,3 +14,10 @@ function openNav() {
         nav.style.display = "block";
     }
 }
+// JavaScript (optional, for re-triggering animation if needed)
+const scrollingText = document.querySelector('.scrolling-text');
+
+scrollingText.addEventListener('animationiteration', () => {
+  scrollingText.style.animation = 'none';
+  requestAnimationFrame(() => scrollingText.style.animation = '');
+});
