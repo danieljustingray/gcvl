@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roster Maker</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>📅 Sleek Roster Maker</h1>
+
+    <section>
+      <h2>1. Subjects</h2>
+      <form id="subject-form">
+        <div class="row">
+          <input type="text" placeholder="Name" required />
+          <input type="text" placeholder="Abbr" required />
+          <input type="number" placeholder="Lessons/week" required />
+          <input type="text" placeholder="Teacher" required />
+          <input type="text" placeholder="Room" required />
+          <label><input type="checkbox" /> Mandatory</label>
+        </div>
+        <button type="submit">Add Subject</button>
+      </form>
+      <ul id="subject-list" class="vertical-list"></ul>
+    </section>
+
+    <section>
+      <h2>2. Students</h2>
+      <form id="student-form">
+        <input type="text" placeholder="Student name" required id="student-name" />
+        <div id="student-subjects" class="vertical-list"></div>
+        <button type="submit">Add Student</button>
+      </form>
+      <ul id="student-list" class="vertical-list"></ul>
+    </section>
+
+    <section>
+      <h2>3. Locked Time Slots</h2>
+      <form id="locked-form">
+        <select id="day-select">
+          <option>Mon</option><option>Tue</option><option>Wed</option>
+          <option>Thu</option><option>Fri</option>
+        </select>
+        <input type="number" min="1" max="7" placeholder="Hour" required />
+        <button type="submit">Add Locked Slot</button>
+      </form>
+      <ul id="locked-list" class="vertical-list"></ul>
+    </section>
+
+    <button id="generate-btn">Generate Roster</button>
+
+    <section id="rosters">
+      <h2>📋 Student Rosters</h2>
+    </section>
+    <section id="teacher-rosters">
+      <h2>👩‍🏫 Teacher Rosters</h2>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
