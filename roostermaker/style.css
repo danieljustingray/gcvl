@@ -1,11 +1,14 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'aptos', sans-serif;
     background: linear-gradient(to right, #f0f4f8, #e6ecf3);
     margin: 0;
     padding: 2rem;
     color: #333;
   }
-  
+  @font-face {
+    font-family: 'aptos';
+    src: url(aptos.ttf);
+  }
   h1, h2, h3 {
     text-align: center;
     color: #1f3a60;

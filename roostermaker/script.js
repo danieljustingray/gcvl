@@ -1,13 +1,3 @@
-// JavaScript has been updated to:
-// - Display roster cells as "subject - teacher - location"
-// - Randomize subject placements
-// - Use vertical lists for subjects and students
-// - Auto-add rows when typing
-// - Allow removing students
-// - Add checkbox list for subject selection
-// - Allow marking subjects as mandatory
-// - Indicate which student group each teacher slot is for
-
 const subjects = [];
 const students = [];
 const lockedSlots = [];
@@ -22,12 +12,14 @@ document.getElementById('subject-form').addEventListener('submit', function (e) 
   const teacher = inputs[3].value;
   const room = inputs[4].value;
   const mandatory = inputs[5].checked;
+  const workdayChecks = this.querySelectorAll('input[name="workdays"]:checked');
+  const workdays = Array.from(workdayChecks).map(cb => cb.value);
 
-  subjects.push({ name, abbr, amount, teacher, room, mandatory });
+  subjects.push({ name, abbr, amount, teacher, room, mandatory, workdays });
   if (!teachers[teacher]) teachers[teacher] = [];
 
   const li = document.createElement('li');
-  li.textContent = `${name} (${abbr}) - ${amount} lessons with ${teacher}`;
+  li.textContent = `${name} (${abbr}) - ${amount} lessons with ${teacher} (${workdays.join(', ')})`;
   document.getElementById('subject-list').appendChild(li);
 
   updateStudentSubjects();
@@ -68,16 +60,15 @@ document.getElementById('locked-form').addEventListener('submit', function (e) {
 });
 
 function updateStudentSubjects() {
-    const container = document.getElementById('student-subjects');
-    container.innerHTML = '';
-    subjects.forEach(s => {
-      const label = document.createElement('label');
-      const checkedAttr = s.mandatory ? 'checked disabled' : '';
-      label.innerHTML = `<input type="checkbox" value="${s.abbr}" ${checkedAttr}/> ${s.name}${s.mandatory ? ' (mandatory)' : ''}`;
-      container.appendChild(label);
-    });
-  }
-  
+  const container = document.getElementById('student-subjects');
+  container.innerHTML = '';
+  subjects.forEach(s => {
+    const label = document.createElement('label');
+    const checkedAttr = s.mandatory ? 'checked disabled' : '';
+    label.innerHTML = `<input type="checkbox" value="${s.abbr}" ${checkedAttr}/> ${s.name}${s.mandatory ? ' (mandatory)' : ''}`;
+    container.appendChild(label);
+  });
+}
 
 function makeEmptyGrid() {
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
@@ -116,8 +107,17 @@ document.getElementById('generate-btn').addEventListener('click', function () {
 
     for (let i = 0; i < allSlots.length && lessonsPlaced < neededLessons; i++) {
       const slot = allSlots[i];
-      if (subStudents.some(stu => studentRosters[stu.name][slot])) continue;
-      if (teacherRosters[subject.teacher][slot]) continue;
+      const [day, hour] = slot.split('-');
+      if (!subject.workdays.includes(day)) continue;
+
+      // Prevent same subject multiple times per day for a student
+      let conflict = subStudents.some(stu => {
+        return Object.keys(studentRosters[stu.name])
+          .filter(k => k.startsWith(`${day}-`))
+          .some(k => studentRosters[stu.name][k]?.startsWith(`${subject.abbr} -`));
+      });
+
+      if (conflict || subStudents.some(stu => studentRosters[stu.name][slot]) || teacherRosters[subject.teacher][slot]) continue;
 
       subStudents.forEach(stu => studentRosters[stu.name][slot] = `${subject.abbr} - ${subject.teacher} - ${subject.room}`);
       const classList = subStudents.map(s => s.name).join(', ');

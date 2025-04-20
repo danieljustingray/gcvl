@@ -3,21 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Roster Maker</title>
+  <title>Roster maker - GCvL</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <div class="container">
-    <h1>📅 Sleek Roster Maker</h1>
+    <h1>📅 Roster maker</h1>
 
     <section>
       <h2>1. Subjects</h2>
       <form id="subject-form">
         <div class="row">
-          <input type="text" placeholder="Name" required />
-          <input type="text" placeholder="Abbr" required />
+          <input type="text" placeholder="Subject" required />
+          <input type="text" placeholder="Abbreviation" required />
           <input type="number" placeholder="Lessons/week" required />
           <input type="text" placeholder="Teacher" required />
+          <label>Work Days:</label>
+            <label><input type="checkbox" name="workdays" value="Mon"> Mon</label>
+            <label><input type="checkbox" name="workdays" value="Tue"> Tue</label>
+            <label><input type="checkbox" name="workdays" value="Wed"> Wed</label>
+            <label><input type="checkbox" name="workdays" value="Thu"> Thu</label>
+            <label><input type="checkbox" name="workdays" value="Fri"> Fri</label>
           <input type="text" placeholder="Room" required />
           <label><input type="checkbox" /> Mandatory</label>
         </div>
