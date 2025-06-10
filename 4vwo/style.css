@@ -1,0 +1,58 @@
+body {
+  font-family: Tahoma, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #e4f5fc, #bfe8f9);
+  margin: 20px;
+  height: 600vh;
+  color: #003366;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  box-shadow: 0 0 15px rgba(0, 120, 215, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(5px);
+}
+th, td {
+  border: 1px solid #7fc1e3;
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 14px;
+}
+th {
+  background: linear-gradient(to bottom, #58b0e3, #1e7fc2);
+  color: white;
+  text-shadow: 0 1px 2px #003366;
+}
+tbody tr:nth-child(even) {
+  background: rgba(240, 248, 255, 0.6);
+}
+tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.6);
+}
+a {
+  color: #0078d7;
+  text-decoration: none;
+  font-weight: bold;
+}
+a:hover {
+  text-decoration: underline;
+}
+img, button {
+  cursor: pointer;
+  font-family: Tahoma, Verdana, sans-serif;
+}
+.full-cell-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  padding: 8px; /* optional for nicer click area */
+}
+.full-cell-link:hover {
+  background-color: #f0f0f0; /* optional hover effect */
+}
