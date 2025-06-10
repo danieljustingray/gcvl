@@ -2,6 +2,7 @@ const subjects = [];
 const students = [];
 const lockedSlots = [];
 const teachers = {};
+const workdays = {};
 
 document.getElementById('subject-form').addEventListener('submit', function (e) {
   e.preventDefault();
@@ -12,14 +13,14 @@ document.getElementById('subject-form').addEventListener('submit', function (e) 
   const teacher = inputs[3].value;
   const room = inputs[4].value;
   const mandatory = inputs[5].checked;
-  const workdayChecks = this.querySelectorAll('input[name="workdays"]:checked');
-  const workdays = Array.from(workdayChecks).map(cb => cb.value);
+  const days = inputs[6].value.split(',').map(d => d.trim());
 
-  subjects.push({ name, abbr, amount, teacher, room, mandatory, workdays });
+  subjects.push({ name, abbr, amount, teacher, room, mandatory });
   if (!teachers[teacher]) teachers[teacher] = [];
+  workdays[teacher] = days;
 
   const li = document.createElement('li');
-  li.textContent = `${name} (${abbr}) - ${amount} lessons with ${teacher} (${workdays.join(', ')})`;
+  li.textContent = `${name} (${abbr}) - ${amount} lessons with ${teacher}`;
   document.getElementById('subject-list').appendChild(li);
 
   updateStudentSubjects();
@@ -64,8 +65,7 @@ function updateStudentSubjects() {
   container.innerHTML = '';
   subjects.forEach(s => {
     const label = document.createElement('label');
-    const checkedAttr = s.mandatory ? 'checked disabled' : '';
-    label.innerHTML = `<input type="checkbox" value="${s.abbr}" ${checkedAttr}/> ${s.name}${s.mandatory ? ' (mandatory)' : ''}`;
+    label.innerHTML = `<input type="checkbox" value="${s.abbr}" ${s.mandatory ? 'checked' : ''}/> ${s.name}`;
     container.appendChild(label);
   });
 }
@@ -107,17 +107,10 @@ document.getElementById('generate-btn').addEventListener('click', function () {
 
     for (let i = 0; i < allSlots.length && lessonsPlaced < neededLessons; i++) {
       const slot = allSlots[i];
-      const [day, hour] = slot.split('-');
-      if (!subject.workdays.includes(day)) continue;
-
-      // Prevent same subject multiple times per day for a student
-      let conflict = subStudents.some(stu => {
-        return Object.keys(studentRosters[stu.name])
-          .filter(k => k.startsWith(`${day}-`))
-          .some(k => studentRosters[stu.name][k]?.startsWith(`${subject.abbr} -`));
-      });
-
-      if (conflict || subStudents.some(stu => studentRosters[stu.name][slot]) || teacherRosters[subject.teacher][slot]) continue;
+      const [day] = slot.split('-');
+      if (!workdays[subject.teacher].includes(day)) continue;
+      if (subStudents.some(stu => studentRosters[stu.name][slot]?.startsWith(subject.abbr))) continue;
+      if (teacherRosters[subject.teacher][slot]) continue;
 
       subStudents.forEach(stu => studentRosters[stu.name][slot] = `${subject.abbr} - ${subject.teacher} - ${subject.room}`);
       const classList = subStudents.map(s => s.name).join(', ');
@@ -141,7 +134,6 @@ function displayRosters(rosters, containerId) {
     const grid = document.createElement('div');
     grid.className = 'grid-table';
 
-    // Header row
     grid.appendChild(document.createElement('div'));
     days.forEach(d => {
       const cell = document.createElement('div');
@@ -174,3 +166,53 @@ function displayRosters(rosters, containerId) {
     container.appendChild(div);
   }
 }
+
+document.getElementById('csv-upload').addEventListener('change', function (e) {
+  const file = e.target.files[0];  // Get the first file from the input
+  if (!file) return;  // If no file is selected, exit
+
+  const reader = new FileReader();  // Create a new FileReader
+  reader.onload = function (e) {
+    const lines = e.target.result.split('\n');  // Split the file content by new lines
+    lines.forEach(line => {
+      const parts = line.split(',');  // Split each line by commas
+
+      // Skip lines with less than 6 parts (ignore empty lines or incomplete data)
+      if (parts.length < 6) return;
+
+      const [name, abbr, amount, teacher, room, days, mandatory] = parts;
+
+      // Split the days into an array (e.g., Mon|Tue|Wed becomes ['Mon', 'Tue', 'Wed'])
+      const workdaysArray = days.split('|').map(day => day.trim());
+
+      // Convert 'true' or 'false' string into a boolean value
+      const isMandatory = mandatory.trim().toLowerCase() === 'true';
+
+      // Add the subject to the subjects array
+      subjects.push({ 
+        name, 
+        abbr, 
+        amount: parseInt(amount), 
+        teacher, 
+        room, 
+        mandatory: isMandatory 
+      });
+
+      // If this teacher hasn't been added to the list, initialize them
+      if (!teachers[teacher]) teachers[teacher] = [];
+      workdays[teacher] = workdaysArray;
+    });
+
+    // After successful upload, show the "Add Subjects to System" button
+    document.getElementById('add-subjects-btn').style.display = 'block';
+  };
+  
+  // Read the file as text
+  reader.readAsText(file);
+});
+
+// Event listener for the "Add Subjects to System" button
+document.getElementById('add-subjects-btn').addEventListener('click', function () {
+  // Once the CSV is uploaded, update the student subjects and show them
+  updateStudentSubjects();
+});
