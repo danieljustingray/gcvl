@@ -8,6 +8,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="accessibility-toggle">☰</button>
+  <div id="accessibility-controls">
+    <button onclick="changeFontSize(1)">A+</button>
+    <button onclick="changeFontSize(-1)">A-</button>
+    <button onclick="resetFontSize()">Reset</button>
+    <button onclick="removeAllCSS()">CSS weghalen</button>
+  </div>
 <a href="#bottom">Ga naar beneden</a>
 <h1 id="top">Geschiedenis 4 VWO</h1>
 <p>Hoofdstukken: 6.2, 6.3, 6.4, 7.2, 7.3, 7.4, 7.5</p>
@@ -16,6 +23,7 @@
 <p>Oefentoets: Kan als je het vraagt</p>
 <a href="index.html">Ga terug</a><br>
 <a href="#top">Ga naar top</a>
+<script src="script.js"></script>
 <p><i id="bottom">Vragen mag je aan W. Hoogendijk of D. Gray doorgeven</i></p>
 </body>
 </html>

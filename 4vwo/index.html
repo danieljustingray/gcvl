@@ -12,10 +12,24 @@
     h1, p {
       margin: 20px;
     }
+    #myInput {
+      width: 100%;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
   </style>
 </head>
 <body>
-
+<button id="accessibility-toggle">☰</button>
+  <div id="accessibility-controls">
+    <button onclick="changeFontSize(1)">A+</button>
+    <button onclick="changeFontSize(-1)">A-</button>
+    <button onclick="resetFontSize()">Reset</button>
+    <button onclick="sortTable()">Sorteer alfabetisch volgorde</button>
+    <button onclick="removeAllCSS()">CSS weghalen</button>
+  </div>
 <h1>Toetsrooster 4VWO - TW4</h1>
 <p>
   <ul>
@@ -23,7 +37,8 @@
     <li>Lokalen zijn geplaatst op groepen. Dus als je in groep 4VA bjv zit dan heb je 144</li>
   </ul>
 </p>
-<table>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek vak">
+<table id="myTable">
   <thead>
     <tr>
       <th>Vak</th>
@@ -59,4 +74,62 @@
 </table>
 <p>Die lokaal is gebaseerd op groepen. Dus als je in groep 4VA bjv zit dan heb je 144.</p>
 </body>
+<script src="script.js"></script>
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      //check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+</script>
 </html>

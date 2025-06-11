@@ -8,12 +8,20 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="accessibility-toggle">☰</button>
+  <div id="accessibility-controls">
+    <button onclick="changeFontSize(1)">A+</button>
+    <button onclick="changeFontSize(-1)">A-</button>
+    <button onclick="resetFontSize()">Reset</button>
+    <button onclick="removeAllCSS()">CSS weghalen</button>
+  </div>
 <a href="#bottom">Ga naar beneden</a>
 <h1 id="top">Duits 4 VWO</h1>
 <p> Schrijf- en leesvaardigheid rondom het thema
  "Gesundheit, Essen und Trinken, Geschäfte"</p>
 <a href="index.html">Ga terug</a><br>
-<a href="#top">Ga naar top</a>
+<a href="#top">Ga naar top</a><br>
+<script src="script.js"></script>
 <p><i id="bottom">Vragen kun je aan C. Vonhögen doorgeven</i></p>
 </body>
 </html>

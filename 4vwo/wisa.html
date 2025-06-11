@@ -10,12 +10,20 @@
 <body>
 
 <h1>Wiskunde A 4 VWO</h1>
+  <button id="accessibility-toggle">☰</button>
+  <div id="accessibility-controls">
+    <button onclick="changeFontSize(1)">A+</button>
+    <button onclick="changeFontSize(-1)">A-</button>
+    <button onclick="resetFontSize()">Reset</button>
+    <button onclick="removeAllCSS()">CSS weghalen</button>
+  </div>
+
     <p>Hoofdstukken: H5 & H6 geheel</p>
     <p>Opgaven erbij:</p>
     <a href="opgaven_wisa.png" target="_blank"><img src="opgaven_wisa.png" width="100"><br>Tik erop om te vergroten</a>
     <p>Oefentoets: Komt nog</p>
-    <a href="index.html">Ga terug</a>
+    <a href="index.html">Ga terug</a><br>
+    <script src="script.js"></script>
     <p><i id="bottom">Vragen mag je aan D. Gray of E. van Os doorgeven</i></p>
-    <button onclick="resetImg()">Reset image</button>
 </body>
 </html>

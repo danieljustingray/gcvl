@@ -8,6 +8,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="accessibility-toggle">☰</button>
+  <div id="accessibility-controls">
+    <button onclick="changeFontSize(1)">A+</button>
+    <button onclick="changeFontSize(-1)">A-</button>
+    <button onclick="resetFontSize()">Reset</button>
+    <button onclick="removeAllCSS()">CSS weghalen</button>
+  </div>
 <a href="#bottom">Ga naar beneden</a>
 <h1 id="top">Economie 4 VWO</h1>
 <p>Hoofdstuk 3.1, 4.1, 4.2</p>
@@ -16,7 +23,8 @@
 <p>Oefening: <a href="https://cumulus.co">Cumulus.co</a></p>
 <p>Oefentoets: Kan ik maken, vraag het even aan mij om te maken.</p>
 <a href="index.html">Ga terug</a><br>
-<a href="#top">Ga naar top</a>
+<a href="#top">Ga naar top</a><br>
+<script src="script.js"></script>
 <p><i id="bottom">Vragen mag je aan D. Gray of J. Hilbelink doorgeven</i></p>
 </body>
 </html>
