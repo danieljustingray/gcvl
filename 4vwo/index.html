@@ -12,6 +12,7 @@
     h1, p {
       margin: 20px;
     }
+    .middlediv {margin: 20px;}
     #myInput {
       width: 100%;
       font-size: 16px;
@@ -37,41 +38,43 @@
     <li>Lokalen zijn geplaatst op groepen. Dus als je in groep 4VA bjv zit dan heb je 144</li>
   </ul>
 </p>
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek vak">
-<table id="myTable">
-  <thead>
-    <tr>
-      <th>Vak</th>
-      <th>Datum</th>
-      <th>Dag</th>
-      <th>Tijd</th>
-      <th>Leerlingen</th>
-      <th>Duur (min)</th>
-      <th>Lokaal</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td><a href="wisa.html" class="full-cell-link">Wiskunde A</a></td><td>30/06/2025</td><td>ma</td><td>11:00-12:30</td><td>42</td><td>90</td><td></td></tr>
-    <tr><td><a href="wisb.html" class="full-cell-link">Wiskunde B</a></td><td>30/06/2025</td><td>ma</td><td>11:00-12:30</td><td>35</td><td>90</td><td></td></tr>
-    <tr><td><a href="netl.html" class="full-cell-link">Nederlands</a></td><td>30/06/2025</td><td>ma</td><td>13:30-15:00</td><td>77</td><td>90</td><td>144, 145, 146</td></tr>
-    <tr><td><a href="econ.html" class="full-cell-link">Economie</a></td><td>01/07/2025</td><td>di</td><td>08:30-10:00</td><td>46</td><td>90</td><td></td></tr>
-    <tr><td><a href="schk.html" class="full-cell-link">Scheikunde</a></td><td>01/07/2025</td><td>di</td><td>11:00-12:30</td><td>39</td><td>90</td><td>148, 149</td></tr>
-    <tr><td><a href="gesch.html" class="full-cell-link">Geschiedenis</a></td><td>01/07/2025</td><td>di</td><td>13:30-14:45</td><td>47</td><td>75</td><td></td></tr>
-    <tr><td><a href="biol.html" class="full-cell-link">Biologie</a></td><td>02/07/2025</td><td>wo</td><td>08:30-10:00</td><td>34</td><td>90</td><td>149, 150</td></tr>
-    <tr><td><a href="be.html" class="full-cell-link">Bedrijfseconomie</a></td><td>02/07/2025</td><td>wo</td><td>11:00-12:30</td><td>30</td><td>90</td><td></td></tr>
-    <tr><td><a href="ak.html" class="full-cell-link">Aardrijkskunde</a></td><td>02/07/2025</td><td>wo</td><td>13:30-14:30</td><td>31</td><td>60</td><td>144</td></tr>
-    <tr><td>Informatica</td><td>02/07/2025</td><td>wo</td><td>15:00-16:00</td><td>16</td><td>60</td><td></td></tr>
-    <tr><td><a href="fatl.html" class="full-cell-link">Frans</a></td><td>03/07/2025</td><td>do</td><td>08:30-10:00</td><td>43</td><td>90</td><td>140, 141</td></tr>
-    <tr><td><a href="dutl.html" class="full-cell-link">Duits</a></td><td>03/07/2025</td><td>do</td><td>11:00-12:30</td><td>32</td><td>90</td><td>142, 143</td></tr>
-    <tr><td><a href="nat.html" class="full-cell-link">Natuurkunde</a></td><td>03/07/2025</td><td>do</td><td>13:30-14:30</td><td>34</td><td>60</td><td>148, 149</td></tr>
-    <tr><td>Duits (overstap)</td><td>03/07/2025</td><td>do</td><td>13:30-15:00</td><td>2</td><td>90</td><td>143</td></tr>
-    <tr><td><a href="nlt.html" class="full-cell-link">NLT</a></td><td>04/07/2025</td><td>vr</td><td>08:30-09:30</td><td>15</td><td>60</td><td>150</td></tr>
-    <tr><td><a href="im.html" class="full-cell-link">Maatschappijleer</a></td><td>04/07/2025</td><td>vr</td><td>11:00-12:00</td><td>77</td><td>60</td><td></td></tr>
-    <tr><td><a href="te.html" class="full-cell-link">Tekenen</a></td><td>04/07/2025</td><td>vr</td><td>13:30-14:30</td><td>16</td><td>60</td><td></td></tr>
-    <tr><td><a href="mu.html" class="full-cell-link">Muziek</a></td><td>04/07/2025</td><td>vr</td><td>13:30-15:00</td><td>19</td><td>90</td><td>146</td></tr>
-    <tr><td><a href="ltc.html" class="full-cell-link">Latijn</a></td><td>04/07/2025</td><td>vr</td><td>13:30-15:00</td><td>3</td><td>90</td><td></td></tr>
-  </tbody>
-</table>
+<div class="middlediv">
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Zoek vak">
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th>Vak</th>
+        <th>Datum</th>
+        <th>Dag</th>
+        <th>Tijd</th>
+        <th>Leerlingen</th>
+        <th>Duur (min)</th>
+        <th>Lokaal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><a href="wisa.html" class="full-cell-link">Wiskunde A</a></td><td>30/06/2025</td><td>ma</td><td>11:00-12:30</td><td>42</td><td>90</td><td></td></tr>
+      <tr><td><a href="wisb.html" class="full-cell-link">Wiskunde B</a></td><td>30/06/2025</td><td>ma</td><td>11:00-12:30</td><td>35</td><td>90</td><td></td></tr>
+      <tr><td><a href="netl.html" class="full-cell-link">Nederlands</a></td><td>30/06/2025</td><td>ma</td><td>13:30-15:00</td><td>77</td><td>90</td><td>144, 145, 146</td></tr>
+      <tr><td><a href="econ.html" class="full-cell-link">Economie</a></td><td>01/07/2025</td><td>di</td><td>08:30-10:00</td><td>46</td><td>90</td><td></td></tr>
+      <tr><td><a href="schk.html" class="full-cell-link">Scheikunde</a></td><td>01/07/2025</td><td>di</td><td>11:00-12:30</td><td>39</td><td>90</td><td>148, 149</td></tr>
+      <tr><td><a href="gesch.html" class="full-cell-link">Geschiedenis</a></td><td>01/07/2025</td><td>di</td><td>13:30-14:45</td><td>47</td><td>75</td><td></td></tr>
+      <tr><td><a href="biol.html" class="full-cell-link">Biologie</a></td><td>02/07/2025</td><td>wo</td><td>08:30-10:00</td><td>34</td><td>90</td><td>149, 150</td></tr>
+      <tr><td><a href="be.html" class="full-cell-link">Bedrijfseconomie</a></td><td>02/07/2025</td><td>wo</td><td>11:00-12:30</td><td>30</td><td>90</td><td></td></tr>
+      <tr><td><a href="ak.html" class="full-cell-link">Aardrijkskunde</a></td><td>02/07/2025</td><td>wo</td><td>13:30-14:30</td><td>31</td><td>60</td><td>144</td></tr>
+      <tr><td><a href="in.html" class="full-cell-link">Informatica</a></td><td>02/07/2025</td><td>wo</td><td>15:00-16:00</td><td>16</td><td>60</td><td></td></tr>
+      <tr><td><a href="fatl.html" class="full-cell-link">Frans</a></td><td>03/07/2025</td><td>do</td><td>08:30-10:00</td><td>43</td><td>90</td><td>140, 141</td></tr>
+      <tr><td><a href="dutl.html" class="full-cell-link">Duits</a></td><td>03/07/2025</td><td>do</td><td>11:00-12:30</td><td>32</td><td>90</td><td>142, 143</td></tr>
+      <tr><td><a href="nat.html" class="full-cell-link">Natuurkunde</a></td><td>03/07/2025</td><td>do</td><td>13:30-14:30</td><td>34</td><td>60</td><td>148, 149</td></tr>
+      <tr><td>Duits (overstap)</td><td>03/07/2025</td><td>do</td><td>13:30-15:00</td><td>2</td><td>90</td><td>143</td></tr>
+      <tr><td><a href="nlt.html" class="full-cell-link">NLT</a></td><td>04/07/2025</td><td>vr</td><td>08:30-09:30</td><td>15</td><td>60</td><td>150</td></tr>
+      <tr><td><a href="im.html" class="full-cell-link">Maatschappijleer</a></td><td>04/07/2025</td><td>vr</td><td>11:00-12:00</td><td>77</td><td>60</td><td></td></tr>
+      <tr><td><a href="te.html" class="full-cell-link">Tekenen</a></td><td>04/07/2025</td><td>vr</td><td>13:30-14:30</td><td>16</td><td>60</td><td></td></tr>
+      <tr><td><a href="mu.html" class="full-cell-link">Muziek</a></td><td>04/07/2025</td><td>vr</td><td>13:30-15:00</td><td>19</td><td>90</td><td>146</td></tr>
+      <tr><td><a href="ltc.html" class="full-cell-link">Latijn</a></td><td>04/07/2025</td><td>vr</td><td>13:30-15:00</td><td>3</td><td>90</td><td></td></tr>
+    </tbody>
+  </table>
+</div>
 <p>Die lokaal is gebaseerd op groepen. Dus als je in groep 4VA bjv zit dan heb je 144.</p>
 <p><i>Made possible by <a href="http://soppyinc.com" target="_blank">Soppy Inc.</a>&nbsp;&nbsp;<a href="https://coff.ee/danielgray" target="_blank"><img src="../images/buymeacoffee.png" width="100"></a></i></p>
 </body>
