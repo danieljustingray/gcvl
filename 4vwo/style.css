@@ -1,17 +1,15 @@
 body {
   font-family: Tahoma, Verdana, sans-serif;
-  background: linear-gradient(to bottom, #e4f5fc, #bfe8f9);
+  background: #bfe8f9;
   margin: 20px;
   height: 600vh;
-  color: #003366;
+  color: #000000;
 }
 table {
   border-collapse: collapse;
   width: 100%;
   max-width: 900px;
   margin: auto;
-  box-shadow: 0 0 15px rgba(0, 120, 215, 0.3);
-  border-radius: 12px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(5px);
