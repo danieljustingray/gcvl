@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Griftland College Wiki (GCW)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="pagina">
+
+  <header>
+    <div class="logo-letter">GCW</div>
+    <h1>
+      <strong>Griftland College Wiki</strong>
+      De vrije encyclopedie van het Griftland College
+    </h1>
+    <div class="zoekbalk">
+      <form action="zoek.html" method="get">
+        <input type="text" name="q" placeholder="Zoek een artikel…">
+        <button type="submit">Zoek</button>
+      </form>
+    </div>
+  </header>
+
+  <aside>
+    <!--Navigatie-->
+    <h2>Navigatie</h2>
+    <ul>
+      <li><a href="index.html"><strong>Hoofdpagina</strong></a></li>
+      <li><a href="categorieen.html">Alle categorieën</a></li>
+      <li><a href="griftland-college.html">Griftland College</a></li>
+    </ul>
+    <!--Populaire artikelen-->
+    <h2>Populaire artikelen</h2>
+    <ul>
+      <li><a href="griftland-college.html">Griftland College</a></li>
+    </ul>
+  </aside>
+<main>
+  <h1>Zoekresultaten</h1>
+
+  <section>
+    <p id="zoekTekst"></p>
+
+    <div class="inhoudsopgave">
+      <p>Resultaten</p>
+      <ul id="resultatenLijst"></ul>
+    </div>
+  </section>
+</main>
+
+<script>
+const paginas = [
+  { titel: "Griftland College", url: "griftland-college.html" },
+  { titel: "Categorieën", url: "categorieen.html" },
+  { titel: "Lokalen", url: "categorieen.html#lokalen" },
+  { titel: "Docenten", url: "categorieen.html#docenten" },
+  { titel: "Medewerkers", url: "categorieen.html#medewerkers" },
+  { titel: "Evenementen en tradities", url: "categorieen.html#evenementen" },
+  { titel: "Vakken", url: "categorieen.html#vakken" },
+  { titel: "Clubs en verenigingen", url: "categorieen.html#verenigingen" }
+];
+
+// haal zoekterm uit URL
+const params = new URLSearchParams(window.location.search);
+const query = (params.get("q") || "").toLowerCase();
+
+const lijst = document.getElementById("resultatenLijst");
+const tekst = document.getElementById("zoekTekst");
+
+if (!query) {
+  tekst.textContent = "Geen zoekterm ingevoerd.";
+} else {
+  tekst.textContent = "Resultaten voor: " + query;
+
+  const resultaten = paginas.filter(p =>
+    p.titel.toLowerCase().includes(query)
+  );
+
+  if (resultaten.length === 0) {
+    lijst.innerHTML = "<li>Geen resultaten gevonden.</li>";
+  } else {
+    resultaten.forEach(pagina => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+
+      a.href = pagina.url;
+      a.textContent = pagina.titel;
+
+      li.appendChild(a);
+      lijst.appendChild(li);
+    });
+  }
+}
+</script>
+  <footer>
+    <p>Griftland College Wiki (GCW) &mdash; &copy;2026 &mdash; aangemaakt door en voor leerlingen &mdash; geen officiële publicatie van de school</p>
+  </footer>
+</div>
+</body>
+</html>

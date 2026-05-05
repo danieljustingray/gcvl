@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokaal 10 - Griftland College Wiki</title>
+    <link rel="stylesheet" href="../style.css">
+    <meta name="keywords" content="Griftland college, wiki, Soest">
+    <meta name="author" content="Daniel Gray">
+    <script src="search.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page-content">
+        <!--Navbar-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="script.js"></script>
+        <div id="navbar-placeholder"></div>
+        <header>
+            <h1><a href="index.html">Lokaal 10</a></h1>
+        </header>
+        <main>
+            <article>
+                <h2>10</h2>
+                <p>Lokaal 10 is een <b>muzieklokaal</b> tegenover lokaal 14 in de kunstgang.</p>
+                <h3>Bijzonderheden</h3>
+                <p>Deze lokaal is best wel ruimtelijk, heeft een brede assortement aan instrumenten, en veel kleuerijke posters met bands hangen op de muren.</p>
+                <p><a href="11.html">11</a> | <a href="../plekken/kunstgang.html">Kunstgang</a></p>
+            </article>
+        </main>
+        <footer>
+            <p><i>@ 2025 GCvL</i></p>
+        </footer>
+    </div>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

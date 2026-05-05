@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokalen - Griftland College Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="keywords" content="Griftland college, wiki, Soest">
+    <meta name="author" content="Daniel Gray">
+    <script src="search.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page-content">
+        <!--Navbar-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="../script.js"></script>
+        <div id="navbar-placeholder"></div>
+        <header>
+            <h1><a href="index.html">Lokalen</a></h1>
+        </header>
+        <main>
+            <article>
+                <h2>Huidig</h2>
+                <p><i>Tik op een item op die te openen.</i></p>
+                <details>
+                    <summary>Begane grond</summary>
+                    <ul>
+                        <li><a href="lokalen/10.html">10</a></li>
+                        <li><a href="lokalen/11.html">11</a></li>
+                        <li><a href="lokalen/13.html">13</a></li>
+                        <li><a href="lokalen/14.html">14</a></li>
+                        <li><a href="lokalen/15.html">15</a></li>
+                        <li><a href="lokalen/16.html">16</a></li>
+                        <li><a href="lokalen/17.html">17</a></li>
+                        <li><a href="lokalen/18.html">18</a></li>
+                        <li><a href="lokalen/10.html">20</a></li>
+                        <li><a href="lokalen/21.html">21</a></li>
+                        <li><a href="lokalen/22.html">22</a></li>
+                        <li><a href="lokalen/23.html">23</a></li>
+                        <li><a href="lokalen/40.html">40</a></li>
+                        <li><a href="lokalen/41.html">41</a></li>
+                        <li><a href="lokalen/42.html">42</a></li>
+                        <li><a href="lokalen/43.html">43</a></li>
+                        <li><a href="lokalen/44.html">44</a></li>
+                        <li><a href="lokalen/45.html">45</a></li>
+                        <li><a href="lokalen/46.html">46</a></li>
+                        <li><a href="lokalen/47.html">47</a></li>
+                        <li><a href="lokalen/48.html">48</a></li>
+                        <li><a href="lokalen/49.html">49</a></li>
+                        <li><a href="lokalen/50.html">50</a></li>
+                    </ul>
+                </details><br>
+                <details>
+                    <summary>Paleis</summary>
+                    <li><a href="lokalen/1.html">1</a></li>
+                    <li><a href="lokalen/2.html">2</a></li>
+                    <li><a href="lokalen/3.html">3</a></li>
+                    <li><a href="lokalen/4.html">4</a></li>
+                    <li><a href="lokalen/5.html">5</a></li>
+                    <li><a href="lokalen/6.html">6</a></li>
+                    <li><a href="lokalen/7.html">7</a></li>
+                    <li><a href="lokalen/8.html">8</a></li>
+
+                </details>
+            </article>
+        </main>
+        <footer>
+            <p><i>@ 2025 GCvL</i></p>
+        </footer>
+    </div>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

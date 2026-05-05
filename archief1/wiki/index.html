@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Griftland College Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="keywords" content="Griftland college, wiki, Soest">
+    <meta name="author" content="Daniel Gray">
+    <script src="search.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page-content">
+        <!--Navbar-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="../script.js"></script>
+        <div id="navbar-placeholder"></div>
+        <header>
+            <h1><a href="#">Griftland college wiki</a></h1>
+        </header>
+        <main>
+            <article>
+                <h2>Griftland College Wiki</h2>
+                <p>Alle informatie over het Griftland College in Soest.</p>
+                <h3>Op categorie</h3>
+                <ul>
+                    <li><a href="lokalen.html">Lokalen</a></li>
+                    <li><a href="plekken.html">Plekken</a></li>
+                    <li><a href="ruimtes.html">Andere ruimtes (kantoren enz enz)</a></li>
+                    <li><a href="plattegrond.html">Plattegronden</a></li>
+                    <li><a href="roosters.html">Roosters</a></li>
+                    <li><a href="docenten.html">Docenten</a></li>
+                    <li><a href="medewerkers.html">Andere medewerkers</a></li>
+                    <li><a href="clubs.html">Clubs & raden</a></li>
+                    <li><a href="klassen.html">Klassen & clusters</a></li>
+                    <li><a href="events.html">Evenementen</a></li>
+                    <li><a href="activiteiten.html">Activiteiten</a></li>
+                    <li><a href="excursies.html">Excursies</a></li>
+                    <li><a href="programmas.html">Programma's & ICT</a></li>
+                    <li><a href="vakken.html">Vakken op het Griftland</a></li>
+                    <li><a href="toetsrooster.html">Toetsroosters</a></li>
+                </ul>
+            </article>
+        </main>
+        <footer>
+            <p><i>@ 2025 GCvL</i></p>
+        </footer>
+    </div>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

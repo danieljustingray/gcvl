@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokaal 11 - Griftland College Wiki</title>
+    <link rel="stylesheet" href="../style.css">
+    <meta name="keywords" content="Griftland college, wiki, Soest">
+    <meta name="author" content="Daniel Gray">
+    <script src="search.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page-content">
+        <!--Navbar-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="script.js"></script>
+        <div id="navbar-placeholder"></div>
+        <header>
+            <h1><a href="index.html">Lokaal 11</a></h1>
+        </header>
+        <main>
+            <article>
+                <h2>11</h2>
+                <p>Lokaal 11 is een <b>tekenlokaal</b> achterin de <a href="../plekken/werkvloer.html">werkvloer.</a></p>
+                <h3>Bijzonderheden</h3>
+                <p>Deze lokaal is best wel ruimtelijk, heeft een brede assortement aan tekenspullen, en heeft directe toegang tot 11A, een berging.</p>
+                <p><a href="10.html">10</a> | <a href="../plekken/kunstgang.html">Kunstgang</a> | <a href="13.html">13</a></p>
+            </article>
+        </main>
+        <footer>
+            <p><i>@ 2025 GCvL</i></p>
+        </footer>
+    </div>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
