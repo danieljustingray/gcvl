@@ -184,7 +184,7 @@ aside ul li a:hover {
 
 main {
   padding: 32px 40px;
-  max-width: 900px;
+  max-width: 1500px;
 }
 
 /* Paginatitel */
@@ -442,4 +442,169 @@ footer {
   padding: 16px;
   font-size: 0.82rem;
   color: var(--subtekst);
+}
+
+/* ===========================
+   Responsive / mobiel
+   =========================== */
+
+@media (max-width: 1000px) {
+
+  /* Pagina van 2 kolommen naar 1 kolom */
+  .pagina {
+    grid-template-columns: 1fr;
+  }
+
+  /* Zijbalk boven inhoud */
+  aside {
+    border-right: none;
+    border-bottom: 1px solid var(--rand);
+    padding: 20px;
+  }
+
+  /* Hoofdinhoud minder breed */
+  main {
+    padding: 24px 20px;
+    max-width: 100%;
+  }
+
+  /* Infokaart niet meer zwevend */
+  .infokaart {
+    float: none;
+    width: 100%;
+    margin: 0 0 24px 0;
+  }
+
+  /* Categorieën onder elkaar */
+  .categorie-raster {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Voorpagina blokken onder elkaar */
+  .twee-kolommen {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+
+  /* Header netjes stapelen */
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px;
+    gap: 14px;
+  }
+
+  header .logo-letter {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    font-size: 1.8rem;
+  }
+
+  header h1 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  header h1 strong {
+    font-size: 1.4rem;
+  }
+
+  /* Zoekbalk mobiel */
+  header .zoekbalk {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  header .zoekbalk form {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+  }
+
+  header input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Hoofdtitel kleiner */
+  main > h1 {
+    font-size: 1.7rem;
+  }
+
+  section h2 {
+    font-size: 1.2rem;
+  }
+
+  section h3 {
+    font-size: 1rem;
+  }
+
+  /* Inhoudsopgave volledig breed */
+  .inhoudsopgave {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Kleurvlakken iets kleiner */
+  .kleurvlak {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Tabellen beter leesbaar */
+  .infokaart td {
+    display: block;
+    width: 100%;
+  }
+
+  .infokaart td:first-child {
+    width: 100%;
+    border-bottom: none;
+    padding-bottom: 2px;
+  }
+
+  .infokaart td:last-child {
+    padding-top: 0;
+    padding-bottom: 10px;
+  }
+
+  /* Categorieën volledig onder elkaar */
+  .categorie-raster {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tekst iets compacter */
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+
+  main {
+    padding: 18px 14px;
+  }
+
+  aside {
+    padding: 16px 14px;
+  }
+
+  .welkom-banner {
+    padding: 20px;
+  }
+
+  .uitgelicht,
+  .kolom-blok,
+  .categorie-kaart {
+    padding: 16px;
+  }
+
+  header button {
+    white-space: nowrap;
+  }
 }
