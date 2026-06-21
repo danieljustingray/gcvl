@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>De Grote Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#bfe9ff;
+    --sky-mid:#e3f7ff;
+    --sky-bottom:#f3fcff;
+    --aqua:#19b6e0;
+    --aqua-deep:#0f8fc4;
+    --leaf:#7ed957;
+    --leaf-deep:#4cb22f;
+    --ink:#0d3b4f;
+    --ink-soft:#3a6b7d;
+    --glass:rgba(255,255,255,0.55);
+    --glass-edge:rgba(255,255,255,0.85);
+    --bad:#ff6b5e;
+    --bad-deep:#e0473a;
+    font-family:'Quicksand', 'Segoe UI', sans-serif;
+  }
+
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  html, body{ height:100%; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    color:var(--ink);
+    background:
+      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(255,255,255,0.9), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 0% 100%, rgba(126,217,87,0.25), transparent 55%),
+      linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-bottom) 100%);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:40px 16px 60px;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ---- floating bubbles ---- */
+  .bubble-field{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+  }
+
+  .bubble{
+    position:absolute;
+    bottom:-120px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 25%, rgba(255,255,255,0.95), rgba(255,255,255,0.15) 40%, rgba(255,255,255,0.05) 70%);
+    border:1px solid rgba(255,255,255,0.5);
+    box-shadow: inset 0 0 12px rgba(255,255,255,0.6), 0 4px 10px rgba(15,143,196,0.08);
+    animation: drift linear infinite;
+    opacity:0.7;
+  }
+
+  @keyframes drift{
+    0%   { transform: translateY(0) translateX(0) scale(1); opacity:0; }
+    8%   { opacity:0.7; }
+    100% { transform: translateY(-115vh) translateX(20px) scale(1.05); opacity:0; }
+  }
+
+  .bubble:nth-child(1){ left:6%;  width:46px; height:46px; animation-duration:17s; animation-delay:0s; }
+  .bubble:nth-child(2){ left:18%; width:22px; height:22px; animation-duration:12s; animation-delay:2s; }
+  .bubble:nth-child(3){ left:32%; width:64px; height:64px; animation-duration:22s; animation-delay:1s; }
+  .bubble:nth-child(4){ left:48%; width:30px; height:30px; animation-duration:14s; animation-delay:4s; }
+  .bubble:nth-child(5){ left:63%; width:50px; height:50px; animation-duration:19s; animation-delay:0.5s; }
+  .bubble:nth-child(6){ left:78%; width:24px; height:24px; animation-duration:13s; animation-delay:3s; }
+  .bubble:nth-child(7){ left:88%; width:40px; height:40px; animation-duration:20s; animation-delay:5s; }
+  .bubble:nth-child(8){ left:40%; width:18px; height:18px; animation-duration:10s; animation-delay:6s; }
+
+  @media (prefers-reduced-motion: reduce){
+    .bubble{ animation:none; opacity:0.25; bottom:10%; }
+  }
+
+  .quiz-shell{
+    width:100%;
+    max-width:620px;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---- Header / tracker ---- */
+  .quiz-header{
+    text-align:center;
+    margin-bottom:22px;
+  }
+
+  .eyebrow{
+    font-family:'Comfortaa', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-size:clamp(11px, 3vw, 12px);
+    color:var(--aqua-deep);
+    font-weight:700;
+    margin:0 0 6px;
+  }
+
+  h1{
+    font-family:'Comfortaa', sans-serif;
+    font-weight:700;
+    font-size:clamp(24px, 6vw, 32px);
+    margin:0 0 18px;
+    color:var(--ink);
+    text-shadow:0 1px 0 rgba(255,255,255,0.7);
+  }
+
+  .tracker{
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .tracker .chip{
+    width:18px;
+    height:10px;
+    border-radius:6px;
+    background:rgba(255,255,255,0.6);
+    border:1px solid rgba(15,143,196,0.25);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.8);
+    transition:background .25s ease, box-shadow .25s ease;
+  }
+
+  .tracker .chip.done{
+    background:linear-gradient(180deg, #9cf0ff, var(--aqua));
+    border-color:var(--aqua-deep);
+  }
+
+  .tracker .chip.current{
+    background:linear-gradient(180deg, #b6ff9e, var(--leaf));
+    border-color:var(--leaf-deep);
+    box-shadow: 0 0 0 3px rgba(126,217,87,0.25), inset 0 1px 1px rgba(255,255,255,0.8);
+  }
+
+  /* ---- Glass card ---- */
+  .card{
+    position:relative;
+    background:var(--glass);
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    border:1px solid var(--glass-edge);
+    border-radius:28px;
+    padding:clamp(20px, 5vw, 36px);
+    box-shadow:
+      0 12px 40px rgba(15,90,120,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    overflow:hidden;
+  }
+
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:55%;
+    background:linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0) 100%);
+    border-radius:28px 28px 60% 60% / 28px 28px 40% 40%;
+    pointer-events:none;
+  }
+
+  .card > *{ position:relative; z-index:1; }
+
+  .meta-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:0 0 10px;
+  }
+
+  .q-count{
+    font-family:'Comfortaa', sans-serif;
+    font-size:clamp(12px, 3vw, 13px);
+    font-weight:700;
+    color:var(--aqua-deep);
+    margin:0;
+  }
+
+  .category-badge{
+    font-size:11px;
+    font-weight:700;
+    color:#fff;
+    background:linear-gradient(180deg, #8fe3ff, var(--aqua-deep));
+    padding:4px 10px;
+    border-radius:20px;
+    box-shadow:inset 0 1px 1px rgba(255,255,255,0.6), 0 2px 6px rgba(15,143,196,0.3);
+  }
+
+  .stars{
+    font-size:12px;
+    letter-spacing:1px;
+    color:#f5a623;
+    text-shadow:0 1px 0 rgba(255,255,255,0.6);
+  }
+
+  .q-text{
+    font-size:clamp(17px, 4.4vw, 20px);
+    line-height:1.45;
+    margin:0 0 22px;
+    font-weight:600;
+    color:var(--ink);
+  }
+
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .option{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    border-radius:16px;
+    cursor:pointer;
+    font-size:clamp(14px, 3.8vw, 15.5px);
+    background:rgba(255,255,255,0.55);
+    border:1.5px solid rgba(255,255,255,0.8);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), 0 2px 6px rgba(15,90,120,0.06);
+    transition:transform .12s ease, background .15s ease, box-shadow .15s ease;
+  }
+
+  .option:hover{ transform:translateY(-1px); background:rgba(255,255,255,0.75); }
+
+  .option .opt-letter{
+    width:26px; height:26px;
+    flex-shrink:0;
+    border-radius:50%;
+    background:linear-gradient(180deg, #fff, #dff3ff);
+    border:1px solid rgba(15,143,196,0.3);
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:700; color:var(--aqua-deep);
+  }
+
+  .option input{ display:none; }
+
+  .option.selected{
+    background:linear-gradient(180deg, rgba(184,247,255,0.85), rgba(140,225,255,0.7));
+    border-color:var(--aqua-deep);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), 0 0 0 3px rgba(25,182,224,0.18);
+  }
+
+  .option.selected .opt-letter{
+    background:linear-gradient(180deg, #6fe0ff, var(--aqua-deep));
+    color:#fff;
+    border-color:var(--aqua-deep);
+  }
+
+  /* ---- Identity fields ---- */
+  .field{ margin-bottom:16px; }
+
+  .field label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+
+  .field input{
+    width:100%;
+    padding:13px 14px;
+    border-radius:14px;
+    font-size:15px;
+    font-family:inherit;
+    background:rgba(255,255,255,0.7);
+    border:1.5px solid rgba(255,255,255,0.9);
+    box-shadow: inset 0 1px 3px rgba(15,90,120,0.08);
+  }
+
+  .field input:focus{ outline:2px solid var(--aqua); outline-offset:1px; }
+
+  .intro-blurb{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:0 0 20px;
+    line-height:1.5;
+  }
+
+  /* ---- Nav buttons (glossy) ---- */
+  .nav-row{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:26px;
+  }
+
+  button{
+    font-family:'Comfortaa', sans-serif;
+    font-size:clamp(13px, 3.6vw, 15px);
+    font-weight:700;
+    border-radius:999px;
+    padding:13px 26px;
+    border:none;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition:transform .12s ease, opacity .15s ease, box-shadow .15s ease;
+    flex:1;
+    max-width:220px;
+  }
+
+  button::after{
+    content:"";
+    position:absolute;
+    top:2px; left:8%;
+    width:84%;
+    height:38%;
+    background:linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0));
+    border-radius:999px;
+    pointer-events:none;
+  }
+
+  button:active{ transform:scale(0.97); }
+  button:disabled{ opacity:.4; cursor:not-allowed; }
+
+  .btn-primary{
+    background:linear-gradient(180deg, #8ff0a8, var(--leaf-deep));
+    color:#0d3b1f;
+    box-shadow: 0 5px 14px rgba(76,178,47,0.35), inset 0 1px 1px rgba(255,255,255,0.6);
+  }
+  .btn-primary:hover:not(:disabled){ box-shadow: 0 7px 18px rgba(76,178,47,0.45), inset 0 1px 1px rgba(255,255,255,0.6); }
+
+  .btn-ghost{
+    background:rgba(255,255,255,0.55);
+    color:var(--ink-soft);
+    border:1.5px solid rgba(255,255,255,0.8);
+    flex:0 0 auto;
+  }
+  .btn-ghost:hover{ background:rgba(255,255,255,0.8); }
+
+  /* ---- Result screen ---- */
+  .result{ text-align:center; }
+
+  .score-big{
+    font-family:'Comfortaa', sans-serif;
+    font-size:clamp(42px, 12vw, 58px);
+    font-weight:700;
+    margin:6px 0;
+    background:linear-gradient(180deg, var(--aqua), var(--aqua-deep));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:none;
+  }
+
+  .score-label{
+    color:var(--ink-soft);
+    font-size:14px;
+    margin-bottom:20px;
+    font-weight:600;
+  }
+
+  .status-line{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:700;
+    padding:8px 16px;
+    border-radius:20px;
+    margin-bottom:20px;
+  }
+
+  .status-line.ok{ background:rgba(126,217,87,0.25); color:var(--leaf-deep); }
+  .status-line.err{ background:rgba(255,107,94,0.18); color:var(--bad-deep); }
+  .status-line.pending{ background:rgba(25,182,224,0.15); color:var(--aqua-deep); }
+
+  .review{
+    text-align:left;
+    margin-top:24px;
+    border-top:1px dashed rgba(15,90,120,0.2);
+    padding-top:18px;
+  }
+
+  .review-item{
+    padding:11px 0;
+    border-bottom:1px dashed rgba(15,90,120,0.12);
+    font-size:13.5px;
+    line-height:1.5;
+  }
+
+  .review-item:last-child{ border-bottom:none; }
+
+  .review-item .tag{ font-weight:800; margin-right:6px; }
+  .tag.correct{ color:var(--leaf-deep); }
+  .tag.incorrect{ color:var(--bad-deep); }
+
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:20px;
+  }
+
+  /* ---- Mobile tightening ---- */
+  @media (max-width:480px){
+    body{ padding:24px 12px 50px; }
+    .card{ border-radius:22px; }
+    .nav-row{ flex-direction:column-reverse; }
+    button{ max-width:none; width:100%; }
+    .btn-ghost{ flex:1; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bubble-field">
+  <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
+  <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
+</div>
+
+<div class="quiz-shell">
+  <div class="quiz-header">
+    <p class="eyebrow">Quiz</p>
+    <h1 id="quizTitle">De Grote Quiz</h1>
+    <div class="tracker" id="tracker"></div>
+  </div>
+
+  <div class="card" id="card"></div>
+
+  <footer>Je antwoorden worden opgeslagen zodra je klaar bent. Geen account nodig.</footer>
+</div>
+
+<script>
+const QUIZ = {
+  title: "De Grote Quiz \ud83c\udfaf",
+  questions: [
+    { category:"Geschiedenis", difficulty:2,
+      text:"Welke beschaving bouwde de stad Machu Picchu?",
+      options:["Romeinen","Maya's","Inca's","Grieken"], correct:2 },
+    { category:"Wetenschap", difficulty:1,
+      text:"Wat is de chemische formule van water?",
+      options:["CO2","H2O","O2","NaCl"], correct:1 },
+    { category:"Aardrijkskunde", difficulty:2,
+      text:"Welke rivier stroomt door Londen?",
+      options:["Rijn","Seine","Theems","Donau"], correct:2 },
+    { category:"Technologie", difficulty:3,
+      text:"Welke programmeertaal wordt vaak gebruikt voor websites aan de kant van de browser?",
+      options:["JavaScript","Python","C++","Excel"], correct:0 },
+    { category:"Sport", difficulty:1,
+      text:"Hoeveel spelers staan er per team op het veld bij voetbal tijdens de wedstrijd?",
+      options:["9","10","11","12"], correct:2 },
+    { category:"Natuurkunde", difficulty:2,
+      text:"Wat meet een thermometer?",
+      options:["Luchtdruk","Temperatuur","Snelheid","Gewicht"], correct:1 },
+    { category:"Muziek", difficulty:2,
+      text:"Welke artiest bracht het album \"Thriller\" uit?",
+      options:["Elvis Presley","Michael Jackson","Freddie Mercury","Eminem"], correct:1 },
+    { category:"Ruimte", difficulty:2,
+      text:"Hoe heet de grootste planeet van ons zonnestelsel?",
+      options:["Saturnus","Jupiter","Neptunus","Uranus"], correct:1 },
+    { category:"Economie", difficulty:3,
+      text:"Waar staat de afkorting BTW voor?",
+      options:["Belasting Toegevoegde Waarde","Bedrijfseigen Tijd Wet","Binnenlandse Tarief Waarde","Basis Totaal Winst"], correct:0 },
+    { category:"Taal", difficulty:1,
+      text:"Welke schrijver schreef \"Harry Potter\"?",
+      options:["J.R.R. Tolkien","Stephen King","J.K. Rowling","Suzanne Collins"], correct:2 },
+    { category:"Geschiedenis", difficulty:4,
+      text:"Welke gebeurtenis vond plaats in 1492?",
+      options:["De val van het Romeinse Rijk","De ontdekking van Amerika door Columbus","De Franse Revolutie","De maanlanding"], correct:1 },
+    { category:"Wetenschap", difficulty:4,
+      text:"Welke bloedgroep wordt vaak de universele donor genoemd?",
+      options:["AB+","O-","A+","B-"], correct:1 },
+    { category:"Algemene kennis", difficulty:3,
+      text:"Wat is de officiele munteenheid van Japan?",
+      options:["Won","Yuan","Yen","Ringgit"], correct:2 },
+    { category:"Eindvraag", difficulty:4,
+      text:"Welke Nederlandse provincie heeft de meeste inwoners?",
+      options:["Noord-Holland","Zuid-Holland","Utrecht","Gelderland"], correct:1 }
+  ]
+};
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbygTwVyJrwDdzcJAD_Ls-Xpnqa-kHuZDsOOWv27IVuiAQe0e1m_rRL-F1VWA0OKbfE6/exec";
+
+document.getElementById('quizTitle').textContent = QUIZ.title;
+const LETTERS = ["A","B","C","D","E"];
+
+const state = {
+  step: -1,
+  name: "",
+  email: "",
+  answers: new Array(QUIZ.questions.length).fill(null),
+  submitted: false,
+  submitStatus: "idle"
+};
+
+const card = document.getElementById('card');
+const tracker = document.getElementById('tracker');
+
+function stars(n){
+  return "\u2605".repeat(n) + "\u2606".repeat(5 - n);
+}
+
+function renderTracker(){
+  tracker.innerHTML = "";
+  QUIZ.questions.forEach((_, i) => {
+    const chip = document.createElement('div');
+    chip.className = 'chip' + (state.answers[i] !== null ? ' done' : '') + (i === state.step ? ' current' : '');
+    tracker.appendChild(chip);
+  });
+}
+
+function renderIdentity(){
+  card.innerHTML = `
+    <p class="q-count">Voordat je begint</p>
+    <p class="q-text">Wie ben jij?</p>
+    <p class="intro-blurb">14 vragen, gemiddelde moeilijkheid sterren. Veel succes!</p>
+    <div class="field">
+      <label for="nameInput">Naam</label>
+      <input id="nameInput" type="text" placeholder="Jan Jansen" value="${state.name}">
+    </div>
+    <div class="field">
+      <label for="emailInput">E-mail (optioneel)</label>
+      <input id="emailInput" type="email" placeholder="jan@voorbeeld.nl" value="${state.email}">
+    </div>
+    <div class="nav-row">
+      <span></span>
+      <button class="btn-primary" id="startBtn">Start de quiz</button>
+    </div>
+  `;
+  document.getElementById('startBtn').onclick = () => {
+    state.name = document.getElementById('nameInput').value.trim();
+    state.email = document.getElementById('emailInput').value.trim();
+    if(!state.name){ alert("Vul je naam in."); return; }
+    state.step = 0;
+    render();
+  };
+}
+
+function renderQuestion(){
+  const q = QUIZ.questions[state.step];
+  const selected = state.answers[state.step];
+
+  const optionsHtml = q.options.map((opt, i) => `
+    <label class="option ${selected === i ? 'selected' : ''}">
+      <input type="radio" name="opt" value="${i}" ${selected === i ? 'checked' : ''}>
+      <span class="opt-letter">${LETTERS[i]}</span>
+      <span>${opt}</span>
+    </label>
+  `).join('');
+
+  card.innerHTML = `
+    <div class="meta-row">
+      <p class="q-count">Vraag ${state.step + 1} van ${QUIZ.questions.length}</p>
+      <span class="category-badge">${q.category}</span>
+    </div>
+    <p class="stars">${stars(q.difficulty)}</p>
+    <p class="q-text">${q.text}</p>
+    <div class="options">${optionsHtml}</div>
+    <div class="nav-row">
+      <button class="btn-ghost" id="backBtn" ${state.step === 0 ? 'disabled' : ''}>Terug</button>
+      <button class="btn-primary" id="nextBtn" ${selected === null ? 'disabled' : ''}>
+        ${state.step === QUIZ.questions.length - 1 ? 'Afronden' : 'Volgende'}
+      </button>
+    </div>
+  `;
+
+  card.querySelectorAll('input[name="opt"]').forEach(input => {
+    input.addEventListener('change', (e) => {
+      state.answers[state.step] = parseInt(e.target.value, 10);
+      render();
+    });
+  });
+
+  document.getElementById('backBtn').onclick = () => {
+    if(state.step === 0){ state.step = -1; } else { state.step -= 1; }
+    render();
+  };
+
+  document.getElementById('nextBtn').onclick = () => {
+    if(state.step === QUIZ.questions.length - 1){
+      state.step = QUIZ.questions.length;
+      submitResults();
+    } else {
+      state.step += 1;
+    }
+    render();
+  };
+}
+
+function scoreQuiz(){
+  let correct = 0;
+  QUIZ.questions.forEach((q, i) => {
+    if(state.answers[i] === q.correct) correct += 1;
+  });
+  return correct;
+}
+
+function renderResult(){
+  const correct = scoreQuiz();
+  const total = QUIZ.questions.length;
+  const pct = Math.round((correct / total) * 100);
+
+  let statusHtml = '';
+  if(state.submitStatus === 'sending'){
+    statusHtml = `<div class="status-line pending">Bezig met opslaan...</div>`;
+  } else if(state.submitStatus === 'ok'){
+    statusHtml = `<div class="status-line ok">Antwoorden opgeslagen</div>`;
+  } else if(state.submitStatus === 'error'){
+    statusHtml = `<div class="status-line err">Opslaan mislukt - controleer SCRIPT_URL</div>`;
+  }
+
+  const reviewHtml = QUIZ.questions.map((q, i) => {
+    const isCorrect = state.answers[i] === q.correct;
+    return `
+      <div class="review-item">
+        <span class="tag ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? 'Goed' : 'Fout'}</span>
+        ${q.text}
+        ${isCorrect ? '' : `<br><span style="color:var(--ink-soft)">Juiste antwoord: ${q.options[q.correct]}</span>`}
+      </div>
+    `;
+  }).join('');
+
+  card.innerHTML = `
+    <div class="result">
+      <p class="q-count">Resultaat voor ${state.name}</p>
+      <div class="score-big">${correct}/${total}</div>
+      <p class="score-label">${pct}% goed</p>
+      ${statusHtml}
+    </div>
+    <div class="review">${reviewHtml}</div>
+  `;
+}
+
+function render(){
+  renderTracker();
+  if(state.step === -1) renderIdentity();
+  else if(state.step === QUIZ.questions.length) renderResult();
+  else renderQuestion();
+}
+
+async function submitResults(){
+  if(state.submitted) return;
+  state.submitted = true;
+  state.submitStatus = "sending";
+  render();
+
+  const correct = scoreQuiz();
+  const total = QUIZ.questions.length;
+
+  const payload = {
+    name: state.name,
+    email: state.email,
+    score: correct,
+    total: total,
+    percent: Math.round((correct / total) * 100),
+    answers: QUIZ.questions.map((q, i) => ({
+      question: q.text,
+      category: q.category,
+      difficulty: q.difficulty,
+      yourAnswer: state.answers[i] !== null ? q.options[state.answers[i]] : "(geen antwoord)",
+      correctAnswer: q.options[q.correct],
+      isCorrect: state.answers[i] === q.correct
+    })),
+    submittedAt: new Date().toISOString()
+  };
+
+  if(!SCRIPT_URL || SCRIPT_URL.indexOf("PASTE_YOUR") === 0){
+    state.submitStatus = "error";
+    render();
+    return;
+  }
+
+  try{
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    state.submitStatus = "ok";
+  } catch(err){
+    state.submitStatus = "error";
+  }
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
