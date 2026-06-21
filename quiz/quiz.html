@@ -4,28 +4,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>De Grote Quiz</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /*
+    Ontwerp: helder, toegankelijk, met een vleugje 2008 web-gevoel
+    (gestreepte voortgangsbalk, bevelde knoppen, vlakke kleurvlakken
+    i.p.v. glas/bubbels), maar met moderne toegankelijkheidsnormen:
+    sterk contrast, duidelijke focusstaat, geen overbodige beweging.
+  */
   :root{
-    --sky-top:#bfe9ff;
-    --sky-mid:#e3f7ff;
-    --sky-bottom:#f3fcff;
-    --aqua:#19b6e0;
-    --aqua-deep:#0f8fc4;
-    --leaf:#7ed957;
-    --leaf-deep:#4cb22f;
-    --ink:#0d3b4f;
-    --ink-soft:#3a6b7d;
-    --glass:rgba(255,255,255,0.55);
-    --glass-edge:rgba(255,255,255,0.85);
-    --bad:#ff6b5e;
-    --bad-deep:#e0473a;
-    font-family:'Quicksand', 'Segoe UI', sans-serif;
+    --bg:#eef2f6;
+    --surface:#ffffff;
+    --surface-soft:#f5f8fb;
+    --ink:#16212a;
+    --ink-soft:#3f5160;
+    --border:#c3cfd9;
+    --border-strong:#8fa3b3;
+
+    --primary:#155a87;
+    --primary-dark:#0e3f5f;
+    --primary-tint:#dceefb;
+
+    --accent:#2f7d32;
+    --accent-dark:#1f5722;
+    --accent-tint:#e1f3e0;
+
+    --warn:#a32f22;
+    --warn-dark:#7c2419;
+    --warn-tint:#fbe3df;
+
+    --focus:#b3690a;
+
+    font-family:Verdana, Arial, "Segoe UI", sans-serif;
   }
 
-  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  *{ box-sizing:border-box; }
 
   html, body{ height:100%; }
 
@@ -33,144 +45,80 @@
     margin:0;
     min-height:100vh;
     color:var(--ink);
-    background:
-      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(255,255,255,0.9), transparent 60%),
-      radial-gradient(ellipse 700px 500px at 0% 100%, rgba(126,217,87,0.25), transparent 55%),
-      linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-bottom) 100%);
+    background:var(--bg);
     display:flex;
     align-items:flex-start;
     justify-content:center;
-    padding:40px 16px 60px;
-    overflow-x:hidden;
-    position:relative;
-  }
-
-  /* ---- floating bubbles ---- */
-  .bubble-field{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:0;
-  }
-
-  .bubble{
-    position:absolute;
-    bottom:-120px;
-    border-radius:50%;
-    background:
-      radial-gradient(circle at 30% 25%, rgba(255,255,255,0.95), rgba(255,255,255,0.15) 40%, rgba(255,255,255,0.05) 70%);
-    border:1px solid rgba(255,255,255,0.5);
-    box-shadow: inset 0 0 12px rgba(255,255,255,0.6), 0 4px 10px rgba(15,143,196,0.08);
-    animation: drift linear infinite;
-    opacity:0.7;
-  }
-
-  @keyframes drift{
-    0%   { transform: translateY(0) translateX(0) scale(1); opacity:0; }
-    8%   { opacity:0.7; }
-    100% { transform: translateY(-115vh) translateX(20px) scale(1.05); opacity:0; }
-  }
-
-  .bubble:nth-child(1){ left:6%;  width:46px; height:46px; animation-duration:17s; animation-delay:0s; }
-  .bubble:nth-child(2){ left:18%; width:22px; height:22px; animation-duration:12s; animation-delay:2s; }
-  .bubble:nth-child(3){ left:32%; width:64px; height:64px; animation-duration:22s; animation-delay:1s; }
-  .bubble:nth-child(4){ left:48%; width:30px; height:30px; animation-duration:14s; animation-delay:4s; }
-  .bubble:nth-child(5){ left:63%; width:50px; height:50px; animation-duration:19s; animation-delay:0.5s; }
-  .bubble:nth-child(6){ left:78%; width:24px; height:24px; animation-duration:13s; animation-delay:3s; }
-  .bubble:nth-child(7){ left:88%; width:40px; height:40px; animation-duration:20s; animation-delay:5s; }
-  .bubble:nth-child(8){ left:40%; width:18px; height:18px; animation-duration:10s; animation-delay:6s; }
-
-  @media (prefers-reduced-motion: reduce){
-    .bubble{ animation:none; opacity:0.25; bottom:10%; }
+    padding:32px 16px 56px;
   }
 
   .quiz-shell{
     width:100%;
-    max-width:620px;
-    position:relative;
-    z-index:1;
+    max-width:640px;
   }
 
   /* ---- Header / tracker ---- */
   .quiz-header{
     text-align:center;
-    margin-bottom:22px;
+    margin-bottom:20px;
   }
 
   .eyebrow{
-    font-family:'Comfortaa', sans-serif;
+    font-family:"Trebuchet MS", Verdana, sans-serif;
     text-transform:uppercase;
-    letter-spacing:.16em;
-    font-size:clamp(11px, 3vw, 12px);
-    color:var(--aqua-deep);
-    font-weight:700;
+    letter-spacing:.12em;
+    font-size:12px;
+    color:var(--primary-dark);
+    font-weight:bold;
     margin:0 0 6px;
   }
 
   h1{
-    font-family:'Comfortaa', sans-serif;
-    font-weight:700;
-    font-size:clamp(24px, 6vw, 32px);
-    margin:0 0 18px;
+    font-family:"Trebuchet MS", Verdana, sans-serif;
+    font-weight:bold;
+    font-size:clamp(22px, 6vw, 30px);
+    margin:0 0 16px;
     color:var(--ink);
-    text-shadow:0 1px 0 rgba(255,255,255,0.7);
   }
 
   .tracker{
     display:flex;
-    gap:5px;
+    gap:4px;
     flex-wrap:wrap;
     justify-content:center;
+    list-style:none;
+    padding:0;
+    margin:0;
   }
 
-  .tracker .chip{
-    width:18px;
-    height:10px;
-    border-radius:6px;
-    background:rgba(255,255,255,0.6);
-    border:1px solid rgba(15,143,196,0.25);
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.8);
-    transition:background .25s ease, box-shadow .25s ease;
+  .tracker li{
+    width:20px;
+    height:12px;
+    border-radius:3px;
+    background:var(--surface);
+    border:1px solid var(--border-strong);
   }
 
-  .tracker .chip.done{
-    background:linear-gradient(180deg, #9cf0ff, var(--aqua));
-    border-color:var(--aqua-deep);
+  .tracker li.done{
+    background:var(--primary);
+    border-color:var(--primary-dark);
   }
 
-  .tracker .chip.current{
-    background:linear-gradient(180deg, #b6ff9e, var(--leaf));
-    border-color:var(--leaf-deep);
-    box-shadow: 0 0 0 3px rgba(126,217,87,0.25), inset 0 1px 1px rgba(255,255,255,0.8);
+  .tracker li.current{
+    background:var(--accent);
+    border-color:var(--accent-dark);
+    outline:2px solid var(--focus);
+    outline-offset:1px;
   }
 
-  /* ---- Glass card ---- */
+  /* ---- Card ---- */
   .card{
-    position:relative;
-    background:var(--glass);
-    backdrop-filter:blur(18px) saturate(160%);
-    -webkit-backdrop-filter:blur(18px) saturate(160%);
-    border:1px solid var(--glass-edge);
-    border-radius:28px;
-    padding:clamp(20px, 5vw, 36px);
-    box-shadow:
-      0 12px 40px rgba(15,90,120,0.18),
-      inset 0 1px 0 rgba(255,255,255,0.9);
-    overflow:hidden;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:clamp(18px, 5vw, 32px);
+    box-shadow:0 2px 0 var(--border), 0 8px 18px rgba(22,33,42,0.08);
   }
-
-  .card::before{
-    content:"";
-    position:absolute;
-    top:0; left:0; right:0;
-    height:55%;
-    background:linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0) 100%);
-    border-radius:28px 28px 60% 60% / 28px 28px 40% 40%;
-    pointer-events:none;
-  }
-
-  .card > *{ position:relative; z-index:1; }
 
   .meta-row{
     display:flex;
@@ -182,82 +130,111 @@
   }
 
   .q-count{
-    font-family:'Comfortaa', sans-serif;
-    font-size:clamp(12px, 3vw, 13px);
-    font-weight:700;
-    color:var(--aqua-deep);
+    font-family:"Trebuchet MS", Verdana, sans-serif;
+    font-size:13px;
+    font-weight:bold;
+    color:var(--primary-dark);
     margin:0;
   }
 
   .category-badge{
     font-size:11px;
-    font-weight:700;
-    color:#fff;
-    background:linear-gradient(180deg, #8fe3ff, var(--aqua-deep));
+    font-weight:bold;
+    color:#ffffff;
+    background:var(--primary);
+    border:1px solid var(--primary-dark);
     padding:4px 10px;
-    border-radius:20px;
-    box-shadow:inset 0 1px 1px rgba(255,255,255,0.6), 0 2px 6px rgba(15,143,196,0.3);
+    border-radius:12px;
   }
 
   .stars{
-    font-size:12px;
+    font-size:13px;
     letter-spacing:1px;
-    color:#f5a623;
-    text-shadow:0 1px 0 rgba(255,255,255,0.6);
+    color:var(--focus);
+  }
+
+  .sr-only-stars{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
   }
 
   .q-text{
     font-size:clamp(17px, 4.4vw, 20px);
-    line-height:1.45;
-    margin:0 0 22px;
-    font-weight:600;
+    line-height:1.5;
+    margin:8px 0 20px;
+    font-weight:bold;
     color:var(--ink);
   }
 
-  .options{
+  fieldset.options{
     display:flex;
     flex-direction:column;
     gap:10px;
+    border:none;
+    margin:0;
+    padding:0;
+  }
+
+  fieldset.options legend{
+    position:absolute;
+    left:-9999px;
   }
 
   .option{
     display:flex;
     align-items:center;
     gap:12px;
-    padding:14px 16px;
-    border-radius:16px;
+    padding:13px 14px;
+    border-radius:8px;
     cursor:pointer;
-    font-size:clamp(14px, 3.8vw, 15.5px);
-    background:rgba(255,255,255,0.55);
-    border:1.5px solid rgba(255,255,255,0.8);
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), 0 2px 6px rgba(15,90,120,0.06);
-    transition:transform .12s ease, background .15s ease, box-shadow .15s ease;
+    font-size:15px;
+    background:var(--surface-soft);
+    border:1px solid var(--border);
   }
 
-  .option:hover{ transform:translateY(-1px); background:rgba(255,255,255,0.75); }
+  .option:hover{ background:var(--primary-tint); border-color:var(--border-strong); }
 
   .option .opt-letter{
     width:26px; height:26px;
     flex-shrink:0;
     border-radius:50%;
-    background:linear-gradient(180deg, #fff, #dff3ff);
-    border:1px solid rgba(15,143,196,0.3);
+    background:var(--surface);
+    border:1px solid var(--border-strong);
     display:flex; align-items:center; justify-content:center;
-    font-size:12px; font-weight:700; color:var(--aqua-deep);
+    font-size:12px; font-weight:bold; color:var(--primary-dark);
   }
 
-  .option input{ display:none; }
+  .option input{
+    position:absolute;
+    opacity:0;
+    width:1px;
+    height:1px;
+  }
 
   .option.selected{
-    background:linear-gradient(180deg, rgba(184,247,255,0.85), rgba(140,225,255,0.7));
-    border-color:var(--aqua-deep);
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), 0 0 0 3px rgba(25,182,224,0.18);
+    background:var(--primary-tint);
+    border-color:var(--primary);
   }
 
   .option.selected .opt-letter{
-    background:linear-gradient(180deg, #6fe0ff, var(--aqua-deep));
-    color:#fff;
-    border-color:var(--aqua-deep);
+    background:var(--primary);
+    color:#ffffff;
+    border-color:var(--primary-dark);
+  }
+
+  .option:has(input:focus-visible){
+    outline:3px solid var(--focus);
+    outline-offset:2px;
+  }
+
+  /* Fallback focus ring for browsers without :has() support */
+  .option input:focus-visible{
+    outline:3px solid var(--focus);
+    outline-offset:2px;
   }
 
   /* ---- Identity fields ---- */
@@ -266,23 +243,25 @@
   .field label{
     display:block;
     font-size:13px;
-    font-weight:700;
+    font-weight:bold;
     color:var(--ink-soft);
     margin-bottom:6px;
   }
 
   .field input{
     width:100%;
-    padding:13px 14px;
-    border-radius:14px;
+    padding:12px 14px;
+    border-radius:8px;
     font-size:15px;
     font-family:inherit;
-    background:rgba(255,255,255,0.7);
-    border:1.5px solid rgba(255,255,255,0.9);
-    box-shadow: inset 0 1px 3px rgba(15,90,120,0.08);
+    background:var(--surface);
+    border:1px solid var(--border-strong);
   }
 
-  .field input:focus{ outline:2px solid var(--aqua); outline-offset:1px; }
+  .field input:focus-visible{
+    outline:3px solid var(--focus);
+    outline-offset:1px;
+  }
 
   .intro-blurb{
     font-size:14px;
@@ -291,78 +270,65 @@
     line-height:1.5;
   }
 
-  /* ---- Nav buttons (glossy) ---- */
+  /* ---- Nav buttons (slight 2008 bevel, flat & high-contrast) ---- */
   .nav-row{
     display:flex;
     justify-content:space-between;
     gap:12px;
-    margin-top:26px;
+    margin-top:24px;
   }
 
   button{
-    font-family:'Comfortaa', sans-serif;
-    font-size:clamp(13px, 3.6vw, 15px);
-    font-weight:700;
-    border-radius:999px;
-    padding:13px 26px;
-    border:none;
+    font-family:"Trebuchet MS", Verdana, sans-serif;
+    font-size:15px;
+    font-weight:bold;
+    border-radius:8px;
+    padding:12px 24px;
     cursor:pointer;
-    position:relative;
-    overflow:hidden;
-    transition:transform .12s ease, opacity .15s ease, box-shadow .15s ease;
     flex:1;
     max-width:220px;
   }
 
-  button::after{
-    content:"";
-    position:absolute;
-    top:2px; left:8%;
-    width:84%;
-    height:38%;
-    background:linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0));
-    border-radius:999px;
-    pointer-events:none;
-  }
+  button:active{ transform:translateY(1px); }
+  button:disabled{ opacity:.5; cursor:not-allowed; }
 
-  button:active{ transform:scale(0.97); }
-  button:disabled{ opacity:.4; cursor:not-allowed; }
+  button:focus-visible{
+    outline:3px solid var(--focus);
+    outline-offset:2px;
+  }
 
   .btn-primary{
-    background:linear-gradient(180deg, #8ff0a8, var(--leaf-deep));
-    color:#0d3b1f;
-    box-shadow: 0 5px 14px rgba(76,178,47,0.35), inset 0 1px 1px rgba(255,255,255,0.6);
+    background:var(--accent);
+    color:#ffffff;
+    border:1px solid var(--accent-dark);
+    box-shadow:0 2px 0 var(--accent-dark);
   }
-  .btn-primary:hover:not(:disabled){ box-shadow: 0 7px 18px rgba(76,178,47,0.45), inset 0 1px 1px rgba(255,255,255,0.6); }
+  .btn-primary:hover:not(:disabled){ background:var(--accent-dark); }
 
   .btn-ghost{
-    background:rgba(255,255,255,0.55);
+    background:var(--surface);
     color:var(--ink-soft);
-    border:1.5px solid rgba(255,255,255,0.8);
+    border:1px solid var(--border-strong);
     flex:0 0 auto;
   }
-  .btn-ghost:hover{ background:rgba(255,255,255,0.8); }
+  .btn-ghost:hover{ background:var(--surface-soft); }
 
   /* ---- Result screen ---- */
   .result{ text-align:center; }
 
   .score-big{
-    font-family:'Comfortaa', sans-serif;
-    font-size:clamp(42px, 12vw, 58px);
-    font-weight:700;
+    font-family:"Trebuchet MS", Verdana, sans-serif;
+    font-size:clamp(40px, 12vw, 54px);
+    font-weight:bold;
     margin:6px 0;
-    background:linear-gradient(180deg, var(--aqua), var(--aqua-deep));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    text-shadow:none;
+    color:var(--primary-dark);
   }
 
   .score-label{
     color:var(--ink-soft);
     font-size:14px;
-    margin-bottom:20px;
-    font-weight:600;
+    margin-bottom:18px;
+    font-weight:bold;
   }
 
   .status-line{
@@ -370,47 +336,47 @@
     align-items:center;
     gap:8px;
     font-size:13px;
-    font-weight:700;
+    font-weight:bold;
     padding:8px 16px;
-    border-radius:20px;
-    margin-bottom:20px;
+    border-radius:8px;
+    margin-bottom:18px;
+    border:1px solid transparent;
   }
 
-  .status-line.ok{ background:rgba(126,217,87,0.25); color:var(--leaf-deep); }
-  .status-line.err{ background:rgba(255,107,94,0.18); color:var(--bad-deep); }
-  .status-line.pending{ background:rgba(25,182,224,0.15); color:var(--aqua-deep); }
+  .status-line.ok{ background:var(--accent-tint); color:var(--accent-dark); border-color:var(--accent-dark); }
+  .status-line.err{ background:var(--warn-tint); color:var(--warn-dark); border-color:var(--warn-dark); }
+  .status-line.pending{ background:var(--primary-tint); color:var(--primary-dark); border-color:var(--primary-dark); }
 
   .review{
     text-align:left;
-    margin-top:24px;
-    border-top:1px dashed rgba(15,90,120,0.2);
-    padding-top:18px;
+    margin-top:22px;
+    border-top:1px dashed var(--border-strong);
+    padding-top:16px;
   }
 
   .review-item{
     padding:11px 0;
-    border-bottom:1px dashed rgba(15,90,120,0.12);
-    font-size:13.5px;
+    border-bottom:1px dashed var(--border);
+    font-size:14px;
     line-height:1.5;
   }
 
   .review-item:last-child{ border-bottom:none; }
 
-  .review-item .tag{ font-weight:800; margin-right:6px; }
-  .tag.correct{ color:var(--leaf-deep); }
-  .tag.incorrect{ color:var(--bad-deep); }
+  .review-item .tag{ font-weight:bold; margin-right:6px; }
+  .tag.correct{ color:var(--accent-dark); }
+  .tag.incorrect{ color:var(--warn-dark); }
 
   footer{
     text-align:center;
     font-size:12px;
     color:var(--ink-soft);
-    margin-top:20px;
+    margin-top:18px;
   }
 
   /* ---- Mobile tightening ---- */
   @media (max-width:480px){
-    body{ padding:24px 12px 50px; }
-    .card{ border-radius:22px; }
+    body{ padding:20px 12px 48px; }
     .nav-row{ flex-direction:column-reverse; }
     button{ max-width:none; width:100%; }
     .btn-ghost{ flex:1; }
@@ -419,23 +385,23 @@
   @media (prefers-reduced-motion: reduce){
     *{ transition:none !important; }
   }
+
+  /* ---- High contrast / forced-colors support ---- */
+  @media (forced-colors: active){
+    .option, .card, button, .field input{ border:1px solid CanvasText; }
+  }
 </style>
 </head>
 <body>
-
-<div class="bubble-field">
-  <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
-  <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
-</div>
 
 <div class="quiz-shell">
   <div class="quiz-header">
     <p class="eyebrow">Quiz</p>
     <h1 id="quizTitle">De Grote Quiz</h1>
-    <div class="tracker" id="tracker"></div>
+    <ul class="tracker" id="tracker" aria-label="Voortgang"></ul>
   </div>
 
-  <div class="card" id="card"></div>
+  <div class="card" id="card" role="region" aria-live="polite" aria-label="Quizvraag"></div>
 
   <footer>Je antwoorden worden opgeslagen zodra je klaar bent. Geen account nodig.</footer>
 </div>
@@ -444,9 +410,9 @@
 const QUIZ = {
   title: "De Grote Quiz \ud83c\udfaf",
   questions: [
-    { category:"Geschiedenis", difficulty:2,
-      text:"Welke beschaving bouwde de stad Machu Picchu?",
-      options:["Romeinen","Maya's","Inca's","Grieken"], correct:2 },
+    { category:"TV", difficulty:2,
+      text:"Wie speelt het personage Michael Scott in de Amerikaanse versie van The Office?",
+      options:["Steve Carell","John Krasinski","Rainn Wilson","Ed Helms"], correct:0 },
     { category:"Wetenschap", difficulty:1,
       text:"Wat is de chemische formule van water?",
       options:["CO2","H2O","O2","NaCl"], correct:1 },
@@ -459,9 +425,9 @@ const QUIZ = {
     { category:"Sport", difficulty:1,
       text:"Hoeveel spelers staan er per team op het veld bij voetbal tijdens de wedstrijd?",
       options:["9","10","11","12"], correct:2 },
-    { category:"Natuurkunde", difficulty:2,
-      text:"Wat meet een thermometer?",
-      options:["Luchtdruk","Temperatuur","Snelheid","Gewicht"], correct:1 },
+    { category:"Technologie", difficulty:2,
+      text:"Wat betekent .. / -- .. ... ... / -. -- --- ..- in morsecode?",
+      options:["I must see","SOS","Yes","I miss you"], correct:4 },
     { category:"Muziek", difficulty:2,
       text:"Welke artiest bracht het album \"Thriller\" uit?",
       options:["Elvis Presley","Michael Jackson","Freddie Mercury","Eminem"], correct:1 },
@@ -471,9 +437,9 @@ const QUIZ = {
     { category:"Economie", difficulty:3,
       text:"Waar staat de afkorting BTW voor?",
       options:["Belasting Toegevoegde Waarde","Bedrijfseigen Tijd Wet","Binnenlandse Tarief Waarde","Basis Totaal Winst"], correct:0 },
-    { category:"Taal", difficulty:1,
-      text:"Welke schrijver schreef \"Harry Potter\"?",
-      options:["J.R.R. Tolkien","Stephen King","J.K. Rowling","Suzanne Collins"], correct:2 },
+    { category:"Literatuur", difficulty:2,
+      text:"Welke schrijver schreef de fantasyreeks \"In de ban van de Ring\" (The Lord of the Rings)?",
+      options:["George R.R. Martin","J.R.R. Tolkien","C.S. Lewis","Terry Pratchett"], correct:1 },
     { category:"Geschiedenis", difficulty:4,
       text:"Welke gebeurtenis vond plaats in 1492?",
       options:["De val van het Romeinse Rijk","De ontdekking van Amerika door Columbus","De Franse Revolutie","De maanlanding"], correct:1 },
@@ -481,8 +447,11 @@ const QUIZ = {
       text:"Welke bloedgroep wordt vaak de universele donor genoemd?",
       options:["AB+","O-","A+","B-"], correct:1 },
     { category:"Algemene kennis", difficulty:3,
-      text:"Wat is de officiele munteenheid van Japan?",
-      options:["Won","Yuan","Yen","Ringgit"], correct:2 },
+      text:"Wat is de officiele munteenheid van Zuid-Afrika?",
+      options:["Rand","Pula","Naira","Cedi"], correct:0 },
+    { category:"Wiskunde", difficulty:5,
+      text:"Gegeven: x + y = 12 en x - y = 4. Wat is de waarde van x \u00d7 y?",
+      options:["32","48","16","24"], correct:0 },
     { category:"Eindvraag", difficulty:4,
       text:"Welke Nederlandse provincie heeft de meeste inwoners?",
       options:["Noord-Holland","Zuid-Holland","Utrecht","Gelderland"], correct:1 }
@@ -497,7 +466,6 @@ const LETTERS = ["A","B","C","D","E"];
 const state = {
   step: -1,
   name: "",
-  email: "",
   answers: new Array(QUIZ.questions.length).fill(null),
   submitted: false,
   submitStatus: "idle"
@@ -507,15 +475,21 @@ const card = document.getElementById('card');
 const tracker = document.getElementById('tracker');
 
 function stars(n){
-  return "\u2605".repeat(n) + "\u2606".repeat(5 - n);
+  const filled = "\u2605".repeat(n);
+  const empty = "\u2606".repeat(5 - n);
+  return `<span aria-hidden="true">${filled}${empty}</span><span class="sr-only-stars">Moeilijkheidsgraad ${n} van 5</span>`;
 }
 
 function renderTracker(){
   tracker.innerHTML = "";
   QUIZ.questions.forEach((_, i) => {
-    const chip = document.createElement('div');
-    chip.className = 'chip' + (state.answers[i] !== null ? ' done' : '') + (i === state.step ? ' current' : '');
-    tracker.appendChild(chip);
+    const item = document.createElement('li');
+    item.className = (state.answers[i] !== null ? 'done' : '') + (i === state.step ? ' current' : '');
+    const label = document.createElement('span');
+    label.className = 'sr-only-stars';
+    label.textContent = `Vraag ${i + 1}${state.answers[i] !== null ? ', beantwoord' : ''}${i === state.step ? ', huidige vraag' : ''}`;
+    item.appendChild(label);
+    tracker.appendChild(item);
   });
 }
 
@@ -523,24 +497,19 @@ function renderIdentity(){
   card.innerHTML = `
     <p class="q-count">Voordat je begint</p>
     <p class="q-text">Wie ben jij?</p>
-    <p class="intro-blurb">14 vragen, gemiddelde moeilijkheid sterren. Veel succes!</p>
+    <p class="intro-blurb">${QUIZ.questions.length} vragen, uiteenlopende moeilijkheidsgraad. Veel succes!</p>
     <div class="field">
       <label for="nameInput">Naam</label>
-      <input id="nameInput" type="text" placeholder="Jan Jansen" value="${state.name}">
-    </div>
-    <div class="field">
-      <label for="emailInput">E-mail (optioneel)</label>
-      <input id="emailInput" type="email" placeholder="jan@voorbeeld.nl" value="${state.email}">
+      <input id="nameInput" type="text" placeholder="Jan Jansen" value="${state.name}" autocomplete="name">
     </div>
     <div class="nav-row">
       <span></span>
-      <button class="btn-primary" id="startBtn">Start de quiz</button>
+      <button class="btn-primary" id="startBtn" type="button">Start de quiz</button>
     </div>
   `;
   document.getElementById('startBtn').onclick = () => {
     state.name = document.getElementById('nameInput').value.trim();
-    state.email = document.getElementById('emailInput').value.trim();
-    if(!state.name){ alert("Vul je naam in."); return; }
+    if(!state.name){ alert("Vul je naam in."); document.getElementById('nameInput').focus(); return; }
     state.step = 0;
     render();
   };
@@ -553,7 +522,7 @@ function renderQuestion(){
   const optionsHtml = q.options.map((opt, i) => `
     <label class="option ${selected === i ? 'selected' : ''}">
       <input type="radio" name="opt" value="${i}" ${selected === i ? 'checked' : ''}>
-      <span class="opt-letter">${LETTERS[i]}</span>
+      <span class="opt-letter" aria-hidden="true">${LETTERS[i]}</span>
       <span>${opt}</span>
     </label>
   `).join('');
@@ -564,11 +533,14 @@ function renderQuestion(){
       <span class="category-badge">${q.category}</span>
     </div>
     <p class="stars">${stars(q.difficulty)}</p>
-    <p class="q-text">${q.text}</p>
-    <div class="options">${optionsHtml}</div>
+    <p class="q-text" id="questionText">${q.text}</p>
+    <fieldset class="options" aria-describedby="questionText">
+      <legend>Antwoordopties</legend>
+      ${optionsHtml}
+    </fieldset>
     <div class="nav-row">
-      <button class="btn-ghost" id="backBtn" ${state.step === 0 ? 'disabled' : ''}>Terug</button>
-      <button class="btn-primary" id="nextBtn" ${selected === null ? 'disabled' : ''}>
+      <button class="btn-ghost" id="backBtn" type="button" ${state.step === 0 ? 'disabled' : ''}>Terug</button>
+      <button class="btn-primary" id="nextBtn" type="button" ${selected === null ? 'disabled' : ''}>
         ${state.step === QUIZ.questions.length - 1 ? 'Afronden' : 'Volgende'}
       </button>
     </div>
@@ -633,7 +605,7 @@ function renderResult(){
   card.innerHTML = `
     <div class="result">
       <p class="q-count">Resultaat voor ${state.name}</p>
-      <div class="score-big">${correct}/${total}</div>
+      <p class="score-big">${correct}/${total}</p>
       <p class="score-label">${pct}% goed</p>
       ${statusHtml}
     </div>
@@ -659,7 +631,6 @@ async function submitResults(){
 
   const payload = {
     name: state.name,
-    email: state.email,
     score: correct,
     total: total,
     percent: Math.round((correct / total) * 100),
